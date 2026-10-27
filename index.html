@@ -147,16 +147,15 @@ button{font:inherit;color:inherit}
 @media (min-width:1020px){.hero__grid{grid-template-columns:1.05fr .95fr;gap:3.5rem}}
 
 .stage{position:relative;aspect-ratio:1/1;border-radius:32px;overflow:hidden;background:radial-gradient(90% 70% at 50% 45%,#FFFFFF 0%,#F2F8F4 55%,#DDEFE6 100%);isolation:isolate;order:-1;color:#0F4A3F}
-@media (max-width:639px){.stage{aspect-ratio:5/6}.stage .box3d{--h:min(66cqh,88cqw*638/541)}.chip{font-size:.72rem}.chip--a{top:4%}.stage__badge{width:70px;height:70px;font-size:.68rem}.stage__badge big{font-size:1.1rem}}
+@media (max-width:639px){.stage{aspect-ratio:5/6}.stage .box3d{height:66%}.chip{font-size:.72rem}.chip--a{top:4%}.stage__badge{width:70px;height:70px;font-size:.68rem}.stage__badge big{font-size:1.1rem}}
 @media (min-width:1020px){.stage{order:0;aspect-ratio:4/5}}
 .stage__zel{position:absolute;inset:0;opacity:.09;z-index:-1}
 /* Boîte réelle (photos 4 mg) : tour de 360°, face puis dos, puis retour à sa place */
-.stage{container-type:size}
-.box3d{--h:400px;--h:min(68cqh,92cqw*638/541);--w:calc(var(--h)*541/638);position:absolute;left:50%;top:50%;width:var(--w);height:var(--h);margin:calc(var(--h)/-2) 0 0 calc(var(--w)/-2);perspective:calc(var(--h)*3);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.box3d{position:absolute;left:50%;top:50%;height:68%;aspect-ratio:541/638;translate:-50% -50%;perspective:1400px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .box3d__spin,.box3d__in{position:absolute;inset:0;transform-style:preserve-3d}
 .box3d .f{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .f--back{transform:rotateY(180deg)}
-.box3d__sh{position:absolute;left:0;right:0;top:100%;height:calc(var(--h)*.12);margin-top:calc(var(--h)*-.04);background:radial-gradient(closest-side,rgb(11 31 26/.3),transparent);transform-origin:center;z-index:-1}
+.box3d__sh{position:absolute;left:0;right:0;top:96%;height:12%;background:radial-gradient(closest-side,rgb(11 31 26/.3),transparent);transform-origin:center;z-index:-1}
 .stage__gum{position:absolute;width:12%;filter:drop-shadow(0 12px 12px rgb(11 31 26/.18))}
 .stage__gum--1{left:7%;bottom:18%;transform:rotate(-18deg)}
 .stage__gum--2{right:8%;top:20%;width:9%;transform:rotate(22deg)}
