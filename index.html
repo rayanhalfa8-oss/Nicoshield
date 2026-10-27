@@ -147,35 +147,16 @@ button{font:inherit;color:inherit}
 @media (min-width:1020px){.hero__grid{grid-template-columns:1.05fr .95fr;gap:3.5rem}}
 
 .stage{position:relative;aspect-ratio:1/1;border-radius:32px;overflow:hidden;background:radial-gradient(90% 70% at 50% 45%,#FFFFFF 0%,#F2F8F4 55%,#DDEFE6 100%);isolation:isolate;order:-1;color:#0F4A3F}
-@media (max-width:639px){.stage{aspect-ratio:5/6}.stage .box3d{--w:min(40cqw,30cqh)}.chip{font-size:.72rem}.chip--a{top:4%}.stage__badge{width:70px;height:70px;font-size:.68rem}.stage__badge big{font-size:1.1rem}}
+@media (max-width:639px){.stage{aspect-ratio:5/6}.stage .box3d{--h:min(66cqh,88cqw*638/541)}.chip{font-size:.72rem}.chip--a{top:4%}.stage__badge{width:70px;height:70px;font-size:.68rem}.stage__badge big{font-size:1.1rem}}
 @media (min-width:1020px){.stage{order:0;aspect-ratio:4/5}}
 .stage__zel{position:absolute;inset:0;opacity:.09;z-index:-1}
-/* Boîte 3D : rotation 360° puis retour à sa place */
+/* Boîte réelle (photos 4 mg) : tour de 360°, face puis dos, puis retour à sa place */
 .stage{container-type:size}
-.box3d{--w:240px;--w:min(48cqw,36cqh);--h:calc(var(--w)*1.84);--d:calc(var(--w)*.42);position:absolute;left:50%;top:50%;width:var(--w);height:var(--h);margin:calc(var(--h)/-2) 0 0 calc(var(--w)/-2);perspective:calc(var(--w)*5);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.box3d{--h:400px;--h:min(68cqh,92cqw*638/541);--w:calc(var(--h)*541/638);position:absolute;left:50%;top:50%;width:var(--w);height:var(--h);margin:calc(var(--h)/-2) 0 0 calc(var(--w)/-2);perspective:calc(var(--h)*3);cursor:pointer;-webkit-tap-highlight-color:transparent}
 .box3d__spin,.box3d__in{position:absolute;inset:0;transform-style:preserve-3d}
-.box3d__in{transform:rotateX(-8deg) rotateY(-24deg)}
-.box3d .f{position:absolute;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
-.f--front,.f--back{inset:0;width:100%;height:100%}
-.f--front{transform:translateZ(calc(var(--d)/2));object-fit:fill}
-.f--back{transform:rotateY(180deg) translateZ(calc(var(--d)/2));background:#FBFCFA;border:calc(var(--w)*.03) solid #2E7D12;color:#1B3A12;font:400 calc(var(--w)*.036)/1.3 var(--f-b);padding:7% 7%;display:flex;flex-direction:column;gap:.6em}
-.f--back h5{font:700 2.6em/1 Arial,sans-serif;letter-spacing:-.03em;color:#2E7D12;margin:0}
-.f--back h5 small{display:block;font-size:.4em;letter-spacing:0;color:#1B3A12;margin-top:.2em}
-.f--back p{margin:0}
-.f--back .st{display:grid;grid-template-columns:1fr 1fr;border:1px solid #2E7D12}
-.f--back .st b{background:#2E7D12;color:#fff;padding:.3em .4em;font-weight:600}
-.f--back .st span{padding:.4em}
-.f--back .warn{margin-top:auto;border:2px solid #C62828;color:#C62828;font-weight:700;padding:.4em;text-align:center;text-transform:uppercase}
-.f--side{top:0;left:50%;width:var(--d);height:100%;margin-left:calc(var(--d)/-2);background:linear-gradient(90deg,#1F6A0B,#3F9418 55%,#2A7810);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--w)*.06);color:#fff}
-.f--right{transform:rotateY(90deg) translateZ(calc(var(--w)/2))}
-.f--left{transform:rotateY(-90deg) translateZ(calc(var(--w)/2));background:linear-gradient(90deg,#2A7810,#3F9418 45%,#1F6A0B)}
-.f--side .lg{writing-mode:vertical-rl;display:flex;align-items:center;gap:.15em;font:700 calc(var(--w)*.2)/1 Arial,sans-serif;letter-spacing:-.04em;text-shadow:0 1px 2px rgb(0 0 0/.25)}
-.f--side .lg small{font-size:.24em;letter-spacing:0;font-weight:700}
-.f--side svg{width:55%;height:auto}
-.f--top,.f--bot{left:0;top:50%;width:100%;height:var(--d);margin-top:calc(var(--d)/-2);background:linear-gradient(#3C8F17,#2A7810)}
-.f--top{transform:rotateX(90deg) translateZ(calc(var(--h)/2))}
-.f--bot{transform:rotateX(-90deg) translateZ(calc(var(--h)/2));background:#1C5C09}
-.box3d__sh{position:absolute;left:-15%;right:-15%;top:100%;height:calc(var(--w)*.2);margin-top:calc(var(--w)*-.02);background:radial-gradient(closest-side,rgb(11 31 26/.32),transparent);transform-origin:center}
+.box3d .f{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.f--back{transform:rotateY(180deg)}
+.box3d__sh{position:absolute;left:0;right:0;top:100%;height:calc(var(--h)*.12);margin-top:calc(var(--h)*-.04);background:radial-gradient(closest-side,rgb(11 31 26/.3),transparent);transform-origin:center;z-index:-1}
 .stage__gum{position:absolute;width:12%;filter:drop-shadow(0 12px 12px rgb(11 31 26/.18))}
 .stage__gum--1{left:7%;bottom:18%;transform:rotate(-18deg)}
 .stage__gum--2{right:8%;top:20%;width:9%;transform:rotate(22deg)}
@@ -479,20 +460,19 @@ button{font:inherit;color:inherit}
   .h1 .line>span{animation:rise .9s var(--ease) both}
   .h1 .line+.line>span{animation-delay:.08s}
   .box3d{animation:boxin .9s var(--ease) both}
-  .box3d__in{animation:boxturn 7s 1s ease-in-out infinite}
-  .box3d__sh{animation:boxsh 7s 1s ease-in-out infinite}
+  .box3d__in{animation:boxturn 9s 1.2s ease-in-out infinite}
+  .box3d__sh{animation:boxsh 9s 1.2s ease-in-out infinite}
   .stage__gum,.stage__badge,.chip{animation:fade .7s .35s var(--ease) both}
 }
 @keyframes rise{from{transform:translateY(.35em)}}
 @keyframes boxin{from{opacity:0;transform:translateY(4%) scale(.96)}}
 @keyframes boxturn{
-  0%,30%{transform:translateY(0) rotateX(-8deg) rotateY(-24deg)}
-  48%{transform:translateY(-5%) rotateX(-12deg) rotateY(110deg)}
-  66%{transform:translateY(-5%) rotateX(-12deg) rotateY(250deg)}
-  82%{transform:translateY(0) rotateX(-8deg) rotateY(344deg)}
-  90%{transform:translateY(0) rotateX(-8deg) rotateY(332deg)}
-  96%,100%{transform:translateY(0) rotateX(-8deg) rotateY(336deg)}}
-@keyframes boxsh{0%,30%,82%,100%{transform:scale(1);opacity:1}48%,66%{transform:scale(.8);opacity:.6}}
+  0%,35%{transform:translateY(0) rotateY(0)}
+  50%,68%{transform:translateY(-3%) rotateY(180deg)}
+  86%{transform:translateY(0) rotateY(366deg)}
+  93%{transform:translateY(0) rotateY(357deg)}
+  100%{transform:translateY(0) rotateY(360deg)}}
+@keyframes boxsh{0%,35%,86%,100%{transform:scale(1);opacity:1}50%,68%{transform:scale(.85);opacity:.7}}
 @keyframes fade{from{opacity:0;translate:0 10px}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -588,21 +568,11 @@ button{font:inherit;color:inherit}
 
     <div class="stage" aria-label="Boîte de Nicorette gomme 4 mg Menthe fraîche, 105 gommes">
       <svg class="stage__zel" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#zellige)"/></svg>
-      <div class="box3d" id="box3d" role="img" aria-label="Boîte de Nicorette gomme à mâcher 4 mg Menthe fraîche, 105 gommes, qui tourne sur elle-même">
+      <div class="box3d" id="box3d" role="img" aria-label="Boîte de Nicorette gomme à mâcher 4 mg, 105 gommes : la face avant puis le dos">
         <div class="box3d__sh" aria-hidden="true"></div>
         <div class="box3d__spin" id="boxSpin" aria-hidden="true"><div class="box3d__in">
-          <img class="f f--front" id="heroImg" src="assets/box-front.webp" width="299" height="550" alt="" fetchpriority="high" decoding="async">
-          <div class="f f--back">
-            <h5>nicorette<sup>®</sup><small>gomme · 4mg · nicotine</small></h5>
-            <p><b>Indications :</b> traitement de la dépendance tabagique, pour soulager les symptômes du sevrage nicotinique. Réservé à l'adulte.</p>
-            <div class="st"><b>Étape 1 · 0 à 3 mois</b><b>Étape 2 · jusqu'à 12 mois</b><span>Une gomme à chaque envie de fumer, 8 à 12 gommes/jour.</span><span>Réduire progressivement jusqu'à 1 à 2 gommes/jour.</span></div>
-            <p><b>Ne pas dépasser 15 gommes/jour.</b> Lisez attentivement la notice.</p>
-            <p class="warn">Ce médicament + grossesse = danger</p>
-          </div>
-          <div class="f f--side f--right"><span class="lg">nicorette<small>gomme · 4mg · nicotine</small></span><svg viewBox="0 0 60 80" aria-hidden="true"><path d="M4 4c22 6 44 30 52 72C40 58 20 52 4 50z" fill="#3FC1C9"/><path d="M4 4c22 6 44 30 52 72C40 58 20 52 4 50z" fill="none" stroke="#B9F0F2" stroke-width="2" opacity=".7"/></svg></div>
-          <div class="f f--side f--left"><span class="lg">nicorette<small>gomme · 4mg · nicotine</small></span><svg viewBox="0 0 60 80" aria-hidden="true"><path d="M4 4c22 6 44 30 52 72C40 58 20 52 4 50z" fill="#3FC1C9"/><path d="M4 4c22 6 44 30 52 72C40 58 20 52 4 50z" fill="none" stroke="#B9F0F2" stroke-width="2" opacity=".7"/></svg></div>
-          <div class="f f--top"></div>
-          <div class="f f--bot"></div>
+          <img class="f f--front" id="heroImg" src="assets/box-4mg-front.webp" width="541" height="638" alt="" fetchpriority="high" decoding="async">
+          <img class="f f--back" src="assets/box-4mg-back.webp" width="457" height="701" alt="" decoding="async">
         </div></div>
       </div>
       <svg class="stage__gum stage__gum--1" aria-hidden="true"><use href="#gum"/></svg>
