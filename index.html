@@ -414,6 +414,14 @@ button{font:inherit;color:inherit}
 .check input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--green);flex:none}
 .check.bad{color:var(--terra)}
 .order__fine{font-size:.82rem;color:var(--muted);text-align:center}
+.inp [aria-invalid="false"]{border-color:var(--green)}
+.done{display:grid;gap:1rem;align-content:start;text-align:center;padding:1rem 0}
+.done__ic{width:64px;height:64px;margin:0 auto;border-radius:50%;background:#1FAF5A;color:#fff;display:grid;place-items:center}
+.done__ic svg{width:34px;height:34px}
+.done h4{font:800 1.5rem/1.15 var(--f-d);margin:0}
+.done ol{text-align:left;display:grid;gap:.5rem;margin:0 auto;padding-left:1.2rem;max-width:34ch;color:var(--muted)}
+.done ol b{color:var(--ink)}
+.done .lnk{background:none;border:0;color:var(--green);font:600 .9rem var(--f-b);text-decoration:underline;cursor:pointer}
 @media (min-width:960px){.order{grid-template-columns:.9fr 1.1fr;gap:3rem}.order__sum{position:sticky;top:96px}}
 
 /* FAQ */
@@ -892,8 +900,20 @@ button{font:inherit;color:inherit}
         <div class="inp"><label for="fAddr">Adresse de livraison</label><textarea id="fAddr" name="addr" autocomplete="street-address" placeholder="Quartier, rue, numéro, repère…" required></textarea><span class="err" hidden>Indiquez votre adresse.</span></div>
         <label class="check" id="ageL"><input type="checkbox" id="fAge" required><span>J'ai 18 ans ou plus, je suis fumeur et je lirai la notice avant utilisation.</span></label>
         <button class="btn btn--wa btn--block" type="submit"><svg><use href="#i-wa"/></svg>Envoyer ma commande · <span id="btnTot"></span></button>
-        <p class="order__fine">Aucun paiement maintenant. On vous confirme sur WhatsApp, puis vous payez au livreur.</p>
+        <p class="order__fine">⏱ 30 secondes · Aucun paiement maintenant. On vous confirme sur WhatsApp, puis vous payez au livreur.<br>Vos coordonnées servent uniquement à la livraison.</p>
+
       </form>
+      <div class="done" id="done" hidden tabindex="-1">
+        <span class="done__ic"><svg><use href="#i-check"/></svg></span>
+        <h4>Dernière étape : envoyez le message</h4>
+        <ol>
+          <li>WhatsApp s'est ouvert avec votre commande déjà écrite.</li>
+          <li>Appuyez sur <b>Envoyer</b> dans WhatsApp : votre commande n'est enregistrée qu'à ce moment-là.</li>
+          <li>On vous confirme, puis le livreur vous appelle. Vous payez à la réception.</li>
+        </ol>
+        <a class="btn btn--wa btn--block" id="doneWa" href="#" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Rouvrir WhatsApp</a>
+        <button class="lnk" type="button" id="doneEdit">Modifier ma commande</button>
+      </div>
     </div>
   </div>
 </section>
@@ -1182,12 +1202,20 @@ button{font:inherit;color:inherit}
   const normTel = v => v.replace(/[\s.\-()]/g, "");
   const telOk = v => /^(?:\+?212|0)[5-7]\d{8}$/.test(normTel(v));
   const setErr = (el, bad) => { el.setAttribute("aria-invalid", String(bad)); const er = el.parentElement.querySelector(".err"); if (er) er.hidden = !bad; };
+  const fieldOk = { fName: v => v.trim().length >= 3, fTel: telOk, fCity: v => !!v, fAddr: v => v.trim().length >= 6 };
+  const fmtTel = v => { const d = normTel(v); return /^0\d{9}$/.test(d) ? d.replace(/(\d{2})(?=\d)/g, "$1 ") : v; };
+  Object.keys(fieldOk).forEach(id => {
+    const el = $("#" + id), saved = store.get("ns_" + id);
+    if (saved && !el.value) el.value = saved;
+    el.addEventListener("blur", () => { if (id === "fTel") el.value = fmtTel(el.value); if (el.value) setErr(el, !fieldOk[id](el.value)); });
+    el.addEventListener("input", () => { store.set("ns_" + id, el.value); if (el.getAttribute("aria-invalid") === "true" && fieldOk[id](el.value)) setErr(el, false); });
+  });
   let started = false;
   form.addEventListener("input", () => { if (!started) { started = true; track("InitiateCheckout", { value: totals().tot, currency: "MAD" }); } });
   form.addEventListener("submit", e => {
     e.preventDefault();
     const n = $("#fName"), t = $("#fTel"), c = $("#fCity"), a = $("#fAddr"), age = $("#fAge");
-    const checks = [[n, n.value.trim().length < 3], [t, !telOk(t.value)], [c, !c.value], [a, a.value.trim().length < 6]];
+    const checks = [[n, !fieldOk.fName(n.value)], [t, !telOk(t.value)], [c, !c.value], [a, !fieldOk.fAddr(a.value)]];
     checks.forEach(([el, bad]) => setErr(el, bad));
     const bad = checks.find(([, b]) => b);
     if (bad) { bad[0].focus(); return; }
@@ -1208,8 +1236,12 @@ button{font:inherit;color:inherit}
       "Je confirme avoir 18 ans ou plus."
     ].filter(x => x !== null).join("\n");
     track("Lead", { value: tot, currency: "MAD" });
+    $("#doneWa").href = wa(msg);
     window.open(wa(msg), "_blank", "noopener");
+    form.hidden = true; done.hidden = false; done.focus();
   });
+  const done = $("#done");
+  $("#doneEdit").onclick = () => { done.hidden = true; form.hidden = false; $("#fName").focus(); };
 
   /* Animations */
   addEventListener("DOMContentLoaded", () => {
