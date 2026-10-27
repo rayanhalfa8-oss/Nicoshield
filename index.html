@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://www.nicoshield.ma/assets/box-4mg-front.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 36'%3E%3Cpath d='M16 1 30 6v11c0 9-6 15-14 18C8 32 2 26 2 17V6z' fill='%230F4A3F'/%3E%3Cpath d='M10 18l4 4 8-9' fill='none' stroke='%239FE3C8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="preload" as="image" href="assets/box-4mg-front.webp" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/box-face-front.webp" type="image/webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,650;12..96,800&family=Instrument+Sans:wght@400;600&family=JetBrains+Mono:wght@500&family=Noto+Kufi+Arabic:wght@700&display=swap">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.nicoshield.ma/#org","name":"Nico Shield","url":"https://www.nicoshield.ma/"},{"@type":"Product","name":"Nicorette® gomme à mâcher 4 mg Menthe glaciale, 105 gommes","image":"https://www.nicoshield.ma/assets/box-4mg-front.webp","brand":{"@type":"Brand","name":"Nicorette"},"description":"Gomme à mâcher médicamenteuse à la nicotine 4 mg, sans sucre, goût menthe glaciale, boîte de 105 gommes.","offers":{"@type":"AggregateOffer","priceCurrency":"MAD","lowPrice":"550","highPrice":"1650","offerCount":"3","availability":"https://schema.org/InStock","seller":{"@id":"https://www.nicoshield.ma/#org"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment commander ?","acceptedAnswer":{"@type":"Answer","text":"Choisissez vos produits, remplissez le formulaire et envoyez la commande sur WhatsApp. Vous payez en espèces à la livraison."}},{"@type":"Question","name":"Le 4 mg est-il fait pour moi ?","acceptedAnswer":{"@type":"Answer","text":"Le 4 mg est indiqué pour les fumeurs très fortement à fortement dépendants, en général plus de 20 cigarettes par jour. En dessous, demandez conseil à votre pharmacien."}},{"@type":"Question","name":"Combien de gommes par jour ?","acceptedAnswer":{"@type":"Answer","text":"En moyenne 8 à 12 par jour au début, sans dépasser 15 gommes par jour."}}]}]}</script>
@@ -147,14 +147,25 @@ button{font:inherit;color:inherit}
 @media (min-width:1020px){.hero__grid{grid-template-columns:1.05fr .95fr;gap:3.5rem}}
 
 .stage{position:relative;aspect-ratio:1/1;border-radius:32px;overflow:hidden;background:radial-gradient(90% 70% at 50% 45%,#FFFFFF 0%,#F2F8F4 55%,#DDEFE6 100%);isolation:isolate;order:-1;color:#0F4A3F}
-@media (max-width:639px){.stage{aspect-ratio:5/6}.stage .box3d{height:66%}.chip{font-size:.72rem}.chip--a{top:4%}.stage__badge{width:70px;height:70px;font-size:.68rem}.stage__badge big{font-size:1.1rem}}
+@media (max-width:639px){.stage{aspect-ratio:5/6}.chip{font-size:.72rem}.chip--a{top:4%}.stage__badge{width:70px;height:70px;font-size:.68rem}.stage__badge big{font-size:1.1rem}}
 @media (min-width:1020px){.stage{order:0;aspect-ratio:4/5}}
 .stage__zel{position:absolute;inset:0;opacity:.09;z-index:-1}
 /* Boîte réelle (photos 4 mg) : tour de 360°, face puis dos, puis retour à sa place */
-.box3d{position:absolute;left:50%;top:50%;height:68%;aspect-ratio:541/638;translate:-50% -50%;perspective:1400px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+/* Boîte en vrai volume, proportions mesurées sur les photos : largeur 0,54 × hauteur, épaisseur 0,49 × hauteur.
+   --h (px) est fixé en JS d'après la hauteur du cadre : translateZ n'accepte pas de pourcentage. */
+.box3d{--h:360px;--w:calc(var(--h)*.54);--d:calc(var(--h)*.49);position:absolute;left:50%;top:50%;width:var(--w);height:var(--h);translate:-50% -50%;perspective:calc(var(--h)*3.5);cursor:pointer;-webkit-tap-highlight-color:transparent}
 .box3d__spin,.box3d__in{position:absolute;inset:0;transform-style:preserve-3d}
-.box3d .f{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.f--back{transform:rotateY(180deg)}
+.box3d__in{transform:rotateX(-10deg) rotateY(-30deg)}
+.box3d .f{position:absolute;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.f--front,.f--back{left:0;top:0;width:100%;height:100%}
+.f--front{transform:translateZ(calc(var(--d)/2))}
+.f--back{transform:rotateY(180deg) translateZ(calc(var(--d)/2))}
+.f--side{top:0;left:50%;width:var(--d);height:100%;margin-left:calc(var(--d)/-2)}
+.f--right{transform:rotateY(90deg) translateZ(calc(var(--w)/2))}
+.f--left{transform:rotateY(-90deg) translateZ(calc(var(--w)/2));filter:brightness(.85)}
+.f--top,.f--bot{left:0;top:50%;width:100%;height:var(--d);margin-top:calc(var(--d)/-2)}
+.f--top{transform:rotateX(90deg) translateZ(calc(var(--h)/2))}
+.f--bot{transform:rotateX(-90deg) translateZ(calc(var(--h)/2));background:#1C5C09}
 .box3d__sh{position:absolute;left:0;right:0;top:96%;height:12%;background:radial-gradient(closest-side,rgb(11 31 26/.3),transparent);transform-origin:center;z-index:-1}
 .stage__gum{position:absolute;width:12%;filter:drop-shadow(0 12px 12px rgb(11 31 26/.18))}
 .stage__gum--1{left:7%;bottom:18%;transform:rotate(-18deg)}
@@ -266,7 +277,7 @@ button{font:inherit;color:inherit}
 .prod__main{background:#fff;border-radius:28px;padding:clamp(1rem,4vw,2.5rem);position:relative;display:grid;gap:1rem}
 /* Visionneuse : face avant / notice au dos, zoom au toucher */
 .pframe{perspective:1400px;overflow:hidden;border-radius:18px}
-.pflip{position:relative;width:min(100%,360px);margin-inline:auto;aspect-ratio:541/638;transform-style:preserve-3d;transition:transform .8s var(--ease);cursor:pointer;transform-origin:var(--ox,50%) var(--oy,50%)}
+.pflip{position:relative;width:min(100%,300px);margin-inline:auto;aspect-ratio:432/800;transform-style:preserve-3d;transition:transform .8s var(--ease);cursor:pointer;transform-origin:var(--ox,50%) var(--oy,50%)}
 .pflip img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .pflip__b{transform:rotateY(180deg)}
 .pflip.is-b{transform:rotateY(180deg);cursor:zoom-in}
@@ -422,12 +433,12 @@ button{font:inherit;color:inherit}
 @keyframes rise{from{transform:translateY(.35em)}}
 @keyframes boxin{from{opacity:0;transform:translateY(4%) scale(.96)}}
 @keyframes boxturn{
-  0%,35%{transform:translateY(0) rotateY(0)}
-  50%,68%{transform:translateY(-3%) rotateY(180deg)}
-  86%{transform:translateY(0) rotateY(366deg)}
-  93%{transform:translateY(0) rotateY(357deg)}
-  100%{transform:translateY(0) rotateY(360deg)}}
-@keyframes boxsh{0%,35%,86%,100%{transform:scale(1);opacity:1}50%,68%{transform:scale(.85);opacity:.7}}
+  0%,30%{transform:translateY(0) rotateX(-10deg) rotateY(-30deg)}
+  48%,62%{transform:translateY(-4%) rotateX(-12deg) rotateY(160deg)}
+  82%{transform:translateY(0) rotateX(-10deg) rotateY(338deg)}
+  90%{transform:translateY(0) rotateX(-10deg) rotateY(326deg)}
+  96%,100%{transform:translateY(0) rotateX(-10deg) rotateY(330deg)}}
+@keyframes boxsh{0%,30%,82%,100%{transform:scale(1);opacity:1}48%,62%{transform:scale(.85);opacity:.7}}
 @keyframes fade{from{opacity:0;translate:0 10px}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -522,11 +533,15 @@ button{font:inherit;color:inherit}
 
     <div class="stage" aria-label="Boîte de Nicorette gomme 4 mg Menthe glaciale, 105 gommes">
       <svg class="stage__zel" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#zellige)"/></svg>
-      <div class="box3d" id="box3d" role="img" aria-label="Boîte de Nicorette gomme à mâcher 4 mg, 105 gommes : la face avant puis le dos">
+      <div class="box3d" id="box3d" role="img" aria-label="Boîte de Nicorette gomme à mâcher 4 mg Menthe glaciale, 105 gommes, qui tourne sur elle-même">
         <div class="box3d__sh" aria-hidden="true"></div>
         <div class="box3d__spin" id="boxSpin" aria-hidden="true"><div class="box3d__in">
-          <img class="f f--front" id="heroImg" src="assets/box-4mg-front.webp" width="541" height="638" alt="" fetchpriority="high" decoding="async">
-          <img class="f f--back" src="assets/box-4mg-back.webp" width="457" height="701" alt="" decoding="async">
+          <img class="f f--front" id="heroImg" src="assets/box-face-front.webp" width="432" height="800" alt="" fetchpriority="high" decoding="async">
+          <img class="f f--back" src="assets/box-face-back.webp" width="432" height="800" alt="" decoding="async">
+          <img class="f f--side f--right" src="assets/box-face-side.webp" width="392" height="800" alt="" decoding="async">
+          <img class="f f--side f--left" src="assets/box-face-side.webp" width="392" height="800" alt="" decoding="async">
+          <img class="f f--top" src="assets/box-face-top.webp" width="432" height="392" alt="" decoding="async">
+          <span class="f f--bot"></span>
         </div></div>
       </div>
       <svg class="stage__gum stage__gum--1" aria-hidden="true"><use href="#gum"/></svg>
@@ -691,8 +706,8 @@ button{font:inherit;color:inherit}
     <div class="prod__vis rv">
       <div class="prod__main">
         <div class="pframe"><div class="pflip" id="pflip">
-          <img class="pflip__f" src="assets/box-4mg-front.webp" width="541" height="638" loading="lazy" decoding="async" alt="Nicorette gomme 4 mg Menthe glaciale, 105 gommes, face avant">
-          <img class="pflip__b" src="assets/box-4mg-back.webp" width="457" height="701" loading="lazy" decoding="async" alt="Dos de la boîte : indications, posologie en deux étapes, maximum 15 gommes par jour, mise en garde grossesse">
+          <img class="pflip__f" src="assets/box-face-front.webp" width="432" height="800" loading="lazy" decoding="async" alt="Nicorette gomme 4 mg Menthe glaciale, 105 gommes, face avant">
+          <img class="pflip__b" src="assets/box-face-back.webp" width="432" height="800" loading="lazy" decoding="async" alt="Dos de la boîte : indications, posologie en deux étapes, maximum 15 gommes par jour, mise en garde grossesse">
         </div></div>
         <div class="ptabs" role="group" aria-label="Voir la boîte">
           <button type="button" aria-pressed="true" data-side="f">Face avant</button>
@@ -926,7 +941,9 @@ button{font:inherit;color:inherit}
   $("#gateNo").onclick = () => { $("#gateMsg").hidden = false; };
 
   /* Boîte 3D : un clic = un tour complet */
-  const boxSpin = $("#boxSpin");
+  const boxSpin = $("#boxSpin"), box3d = $("#box3d"), stage = $(".stage");
+  const sizeBox = () => box3d.style.setProperty("--h", Math.round(stage.clientHeight * (innerWidth < 640 ? .54 : .64)) + "px");
+  sizeBox(); if (window.ResizeObserver) new ResizeObserver(sizeBox).observe(stage);
   $("#box3d").addEventListener("click", () => { if (!reduce && boxSpin.animate) boxSpin.animate([{ transform: "rotateY(0)" }, { transform: "rotateY(360deg)" }], { duration: 1200, easing: "cubic-bezier(.2,.8,.2,1)" }); });
 
   /* Visionneuse produit : face / notice, zoom sur la notice */
