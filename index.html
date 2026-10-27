@@ -876,7 +876,7 @@ button{font:inherit;color:inherit}
     amm: ""
   };
   const P = {
-    g4mg: { name: "Gomme 4 mg · Menthe glaciale", short: "4 mg Menthe glaciale", unit: "105 gommes", img: "box-4mg-front", price: 550 }
+    g4mg: { name: "Gomme 4 mg · Menthe glaciale", short: "4 mg Menthe glaciale", unit: "105 gommes", img: "assets/box-4mg-front.webp", price: 550 }
   };
   const TRIGGERS = {
     cafe:   ["Le café du matin", "Prenez la gomme avec le café, pas après. Le geste remplace la cigarette, et l'envie la plus forte de la journée est couverte."],
@@ -891,7 +891,7 @@ button{font:inherit;color:inherit}
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const fmt = n => Math.round(n).toLocaleString("fr-FR").replace(/[  ]/g, " ");
   const dh = n => fmt(n) + " DH";
-  const img = (k, cls = "") => `<span class="shot ${cls}"><img src="assets/${P[k].img}.webp" width="640" height="640" loading="lazy" decoding="async" alt=""></span>`;
+  const img = (k, cls = "") => `<span class="shot ${cls}"><img src="${P[k].img}" width="640" height="640" loading="lazy" decoding="async" alt=""></span>`;
   const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
   const wa = t => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(t)}`;
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;

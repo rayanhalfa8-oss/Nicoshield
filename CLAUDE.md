@@ -3,6 +3,10 @@
 Landing page e-commerce une page (`index.html` + `assets/`) qui vend la gamme Nicorette® au Maroc :
 paiement à la livraison (COD), commande envoyée sur WhatsApp, public adulte 18+.
 Pas de build : HTML/CSS/JS statique, GSAP via cdnjs. Tester avec `python3 -m http.server 8080`.
+Aperçu artifact (https://claude.ai/artifact/7qaKr4LRSiThENTokwnSs3) : il ne charge pas les fichiers
+`assets/` séparés, donc lancer `python3 scripts/build-artifact.py` et publier `deploy/artifact.html`
+(images intégrées en data URI) sur cette URL. Dans `index.html`, écrire les chemins d'images en entier
+(`assets/xxx.webp`) pour que le script les trouve.
 
 ## Contexte métier
 - Marché marocain : COD dominant, confirmation WhatsApp, prix en DH, villes listées dans le formulaire.
