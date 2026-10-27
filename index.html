@@ -150,11 +150,11 @@ button{font:inherit;color:inherit}
 @media (min-width:640px) and (max-width:759px),(min-width:1020px){.facts{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (min-width:760px),(min-width:560px) and (orientation:landscape){.hero__grid{grid-template-columns:1.05fr .95fr;gap:clamp(1.5rem,4vw,3.5rem)}.h1{font-size:clamp(2.4rem,5.4vw,6rem)}}
 
-.stage{position:relative;aspect-ratio:1/1;border-radius:32px;overflow:hidden;background:radial-gradient(90% 70% at 50% 45%,#FFFFFF 0%,#F2F8F4 55%,#DDEFE6 100%);isolation:isolate;order:-1;color:#0F4A3F}
+.stage{position:relative;aspect-ratio:1/1;border-radius:32px;overflow:hidden;background:radial-gradient(34% 30% at 50% 48%,rgb(230 255 250/.75),transparent 80%),radial-gradient(58% 48% at 50% 48%,rgb(63 193 201/.85),transparent 75%),radial-gradient(120% 90% at 50% 40%,#5FAE1F 0%,#2E7D12 40%,#14560A 68%,#082E05 100%);isolation:isolate;order:-1;color:#EAF7D9;box-shadow:inset 0 0 0 1px rgb(255 255 255/.12),0 30px 60px -30px rgb(12 63 7/.55)}
 @media (max-width:639px){.stage{aspect-ratio:5/6}.chip{font-size:.75rem}.chip--a{top:4%}.stage__badge{width:72px;height:72px;font-size:.75rem}.stage__badge big{font-size:1.1rem}}
 @media (min-width:760px),(min-width:560px) and (orientation:landscape){.stage{order:0;aspect-ratio:4/5}}
 @media (orientation:landscape) and (max-height:540px){.hero__grid{align-items:start}.stage{aspect-ratio:auto;height:min(80svh,440px)}.stage .chip{display:none}.hero{padding-block:1rem 3rem}}
-.stage__zel{position:absolute;inset:0;opacity:.09;z-index:-1}
+.stage__zel{position:absolute;inset:0;opacity:.13;z-index:-1}
 /* Boîte réelle (photos 4 mg) : tour de 360°, face puis dos, puis retour à sa place */
 /* Boîte en vrai volume, proportions mesurées sur les photos : largeur 0,54 × hauteur, épaisseur 0,49 × hauteur.
    --h (px) est fixé en JS d'après la hauteur du cadre : translateZ n'accepte pas de pourcentage. */
@@ -171,7 +171,7 @@ button{font:inherit;color:inherit}
 .f--top,.f--bot{left:0;top:50%;width:100%;height:var(--d);margin-top:calc(var(--d)/-2)}
 .f--top{transform:rotateX(90deg) translateZ(calc(var(--h)/2))}
 .f--bot{transform:rotateX(-90deg) translateZ(calc(var(--h)/2));background:#1C5C09}
-.box3d__sh{position:absolute;left:0;right:0;top:96%;height:12%;background:radial-gradient(closest-side,rgb(11 31 26/.3),transparent);transform-origin:center;z-index:-1}
+.box3d__sh{position:absolute;left:0;right:0;top:96%;height:12%;background:radial-gradient(closest-side,rgb(4 30 3/.55),transparent);transform-origin:center;z-index:-1}
 .stage__gum{position:absolute;width:12%;filter:drop-shadow(0 12px 12px rgb(11 31 26/.18))}
 .stage__gum--1{left:7%;bottom:18%;transform:rotate(-18deg)}
 .stage__gum--2{right:8%;top:20%;width:9%;transform:rotate(22deg)}
