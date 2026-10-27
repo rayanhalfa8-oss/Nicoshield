@@ -263,13 +263,18 @@ button{font:inherit;color:inherit}
 /* Produit héros */
 .prod__grid{display:grid;gap:2.5rem}
 .prod__vis{display:grid;gap:.8rem;align-content:start}
-.prod__main{background:#fff;border-radius:28px;padding:clamp(1rem,4vw,2.5rem);position:relative}
-.prod__main img{width:min(100%,460px);margin-inline:auto;aspect-ratio:1}
-.prod__flag{position:absolute;left:1rem;top:1rem;background:var(--deep);color:#EAF5EF;font:500 .7rem/1 var(--f-m);letter-spacing:.1em;text-transform:uppercase;padding:.5rem .75rem;border-radius:999px}
-.prod__alt{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
-.prod__alt button{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:.5rem;cursor:pointer;display:grid;gap:.35rem;text-align:center;font-size:.78rem;color:var(--muted);transition:border-color .2s}
-.prod__alt button:hover{border-color:var(--green)}
-.prod__alt .shot{border-radius:10px}
+.prod__main{background:#fff;border-radius:28px;padding:clamp(1rem,4vw,2.5rem);position:relative;display:grid;gap:1rem}
+/* Visionneuse : face avant / notice au dos, zoom au toucher */
+.pframe{perspective:1400px;overflow:hidden;border-radius:18px}
+.pflip{position:relative;width:min(100%,360px);margin-inline:auto;aspect-ratio:541/638;transform-style:preserve-3d;transition:transform .8s var(--ease);cursor:pointer;transform-origin:var(--ox,50%) var(--oy,50%)}
+.pflip img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.pflip__b{transform:rotateY(180deg)}
+.pflip.is-b{transform:rotateY(180deg);cursor:zoom-in}
+.pflip.is-z{transform:rotateY(180deg) scale(2.2);cursor:zoom-out}
+.ptabs{display:flex;justify-content:center;gap:.4rem;background:var(--sunk);border-radius:999px;padding:.3rem;justify-self:center}
+.ptabs button{border:0;background:transparent;color:var(--muted);font:600 .88rem/1 var(--f-b);padding:.7rem 1.1rem;border-radius:999px;cursor:pointer;min-height:44px}
+.ptabs button[aria-pressed="true"]{background:var(--green);color:#fff}
+.pflip__hint{font-size:.82rem;color:var(--muted);text-align:center;margin:0}
 .spec{width:100%;border-collapse:collapse;font-size:.96rem}
 .spec th,.spec td{text-align:left;vertical-align:top;padding:.8rem 0;border-bottom:1px solid var(--line)}
 .spec th{width:38%;font:500 .72rem/1.7 var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-right:1rem}
@@ -685,8 +690,15 @@ button{font:inherit;color:inherit}
   <div class="wrap prod__grid">
     <div class="prod__vis rv">
       <div class="prod__main">
-        <span class="prod__flag">Best-seller</span>
-        <img src="assets/box-4mg-front.webp" width="541" height="638" loading="lazy" decoding="async" alt="Nicorette gomme 4 mg Menthe glaciale, 105 gommes">
+        <div class="pframe"><div class="pflip" id="pflip">
+          <img class="pflip__f" src="assets/box-4mg-front.webp" width="541" height="638" loading="lazy" decoding="async" alt="Nicorette gomme 4 mg Menthe glaciale, 105 gommes, face avant">
+          <img class="pflip__b" src="assets/box-4mg-back.webp" width="457" height="701" loading="lazy" decoding="async" alt="Dos de la boîte : indications, posologie en deux étapes, maximum 15 gommes par jour, mise en garde grossesse">
+        </div></div>
+        <div class="ptabs" role="group" aria-label="Voir la boîte">
+          <button type="button" aria-pressed="true" data-side="f">Face avant</button>
+          <button type="button" aria-pressed="false" data-side="b">Lire la notice</button>
+        </div>
+        <p class="pflip__hint" id="pflipHint" aria-live="polite">La boîte authentique, scellée, telle que vous la recevez.</p>
       </div>
     </div>
     <div>
@@ -916,6 +928,22 @@ button{font:inherit;color:inherit}
   /* Boîte 3D : un clic = un tour complet */
   const boxSpin = $("#boxSpin");
   $("#box3d").addEventListener("click", () => { if (!reduce && boxSpin.animate) boxSpin.animate([{ transform: "rotateY(0)" }, { transform: "rotateY(360deg)" }], { duration: 1200, easing: "cubic-bezier(.2,.8,.2,1)" }); });
+
+  /* Visionneuse produit : face / notice, zoom sur la notice */
+  const pf = $("#pflip"), pHint = $("#pflipHint");
+  const showSide = back => {
+    pf.classList.toggle("is-b", back); pf.classList.remove("is-z");
+    $$(".ptabs button").forEach(b => b.setAttribute("aria-pressed", String((b.dataset.side === "b") === back)));
+    pHint.textContent = back ? "Touchez la notice pour zoomer sur un passage." : "La boîte authentique, scellée, telle que vous la recevez.";
+  };
+  $$(".ptabs button").forEach(b => b.onclick = () => showSide(b.dataset.side === "b"));
+  pf.addEventListener("click", e => {
+    if (!pf.classList.contains("is-b")) return showSide(true);
+    const r = pf.getBoundingClientRect();
+    pf.style.setProperty("--ox", (100 - (e.clientX - r.left) / r.width * 100) + "%");
+    pf.style.setProperty("--oy", ((e.clientY - r.top) / r.height * 100) + "%");
+    pf.classList.toggle("is-z");
+  });
 
   /* En-tête, menu, barre mobile */
   const hdr = $("#hdr"), sbar = $("#sbar"), hero = $(".hero"), order = $("#commande");
