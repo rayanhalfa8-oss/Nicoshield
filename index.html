@@ -293,17 +293,29 @@ button{font:inherit;color:inherit}
 /* Produit héros */
 .prod__grid{display:grid;gap:2.5rem}
 .prod__vis{display:grid;gap:.8rem;align-content:start}
-.prod__main{background:#fff;border-radius:28px;padding:clamp(1rem,4vw,2.5rem);position:relative;display:grid;gap:1rem}
+.prod__main{background:radial-gradient(62% 46% at 50% 40%,rgb(245 255 252/.95) 40%,rgb(190 240 236/.55) 68%,transparent 88%),radial-gradient(90% 64% at 50% 40%,rgb(63 193 201/.8),transparent 80%),radial-gradient(120% 90% at 50% 35%,#5FAE1F 0%,#2E7D12 42%,#14560A 70%,#082E05 100%);border-radius:28px;padding:clamp(1.2rem,4vw,2.4rem);position:relative;display:grid;gap:1.1rem;overflow:hidden;isolation:isolate;box-shadow:0 30px 60px -30px rgb(12 63 7/.55)}
+.prod__main::before{content:"";position:absolute;left:50%;bottom:clamp(6.5rem,16vw,8rem);width:62%;height:9%;translate:-50% 0;background:radial-gradient(closest-side,rgb(4 30 3/.55),transparent);z-index:-1}
 /* Visionneuse : face avant / notice au dos, zoom au toucher */
-.pframe{perspective:1400px;overflow:hidden;border-radius:18px}
-.pflip{position:relative;width:min(100%,300px);margin-inline:auto;aspect-ratio:432/800;transform-style:preserve-3d;transition:transform .8s var(--ease);cursor:pointer;transform-origin:var(--ox,50%) var(--oy,50%)}
-.pflip img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.pflip__b{transform:rotateY(180deg)}
-.pflip.is-b{transform:rotateY(180deg);cursor:zoom-in}
-.pflip.is-z{transform:rotateY(180deg) scale(2.2);cursor:zoom-out}
-.ptabs{display:flex;justify-content:center;gap:.4rem;background:var(--sunk);border-radius:999px;padding:.3rem;justify-self:center}
-.ptabs button{border:0;background:transparent;color:var(--muted);font:600 .88rem/1 var(--f-b);padding:.7rem 1.1rem;border-radius:999px;cursor:pointer;min-height:44px}
-.ptabs button[aria-pressed="true"]{background:var(--green);color:#fff}
+.pframe{perspective:1300px;overflow:hidden;border-radius:18px;padding:clamp(1.4rem,4vw,2.2rem) 0 clamp(1.6rem,4.5vw,2.4rem)}
+/* Boîte 3D de la fiche : 3/4 au repos (avec épaisseur), dos à plat pour lire la notice, zoom au toucher */
+.pflip{--w:min(52vw,230px);--h:calc(var(--w)*800/432);--d:calc(var(--h)*.49);position:relative;width:var(--w);height:var(--h);margin:0 auto;transform-style:preserve-3d;transition:transform .9s var(--ease);cursor:pointer;transform-origin:var(--ox,50%) var(--oy,50%);transform:rotateX(-8deg) rotateY(-28deg)}
+.pflip>*{position:absolute;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.pflip__f,.pflip__b{inset:0;width:100%;height:100%}
+.pflip__f{transform:translateZ(calc(var(--d)/2))}
+.pflip__b{transform:rotateY(180deg) translateZ(calc(var(--d)/2))}
+.pflip__s{top:0;left:50%;width:var(--d);height:100%;margin-left:calc(var(--d)/-2)}
+.pflip__r{transform:rotateY(90deg) translateZ(calc(var(--w)/2))}
+.pflip__l{transform:rotateY(-90deg) translateZ(calc(var(--w)/2));filter:brightness(.85)}
+.pflip__t,.pflip__u{left:0;top:50%;width:100%;height:var(--d);margin-top:calc(var(--d)/-2)}
+.pflip__t{transform:rotateX(90deg) translateZ(calc(var(--h)/2))}
+.pflip__u{transform:rotateX(-90deg) translateZ(calc(var(--h)/2));background:#1C5C09}
+.pflip.is-b{transform:rotateX(0) rotateY(180deg);cursor:zoom-in}
+.pflip.is-z{transform:rotateX(0) rotateY(180deg) scale(2.1);cursor:zoom-out}
+@media (prefers-reduced-motion:no-preference){.pflip:not(.is-b):not(.is-z){animation:pidle 6s ease-in-out infinite}}
+@keyframes pidle{0%,100%{transform:rotateX(-8deg) rotateY(-28deg)}50%{transform:rotateX(-6deg) rotateY(-14deg) translateY(-2%)}}
+.ptabs{display:flex;justify-content:center;gap:.4rem;background:rgb(255 255 255/.16);backdrop-filter:blur(6px);border-radius:999px;padding:.3rem;justify-self:center}
+.ptabs button{border:0;background:transparent;color:#EAF7D9;font:600 .88rem/1 var(--f-b);padding:.7rem 1.1rem;border-radius:999px;cursor:pointer;min-height:44px}
+.ptabs button[aria-pressed="true"]{background:#fff;color:#0F4A3F}
 /* Plaquette 3D : photo réelle au recto, aluminium au verso, vraie épaisseur */
 .pblis{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:1.1rem 1.2rem}
 .blister{--bw:clamp(96px,26vw,140px);--bh:calc(var(--bw)*882/534);--bt:5px;position:relative;width:calc(var(--bw)*1.25);height:calc(var(--bh)*1.08);perspective:900px;display:grid;place-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -337,7 +349,7 @@ button{font:inherit;color:inherit}
 .plq button{min-height:44px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:14px;padding:.45rem .75rem;font:500 .85rem/1.2 var(--f-b);cursor:pointer;display:grid;text-align:left}
 .plq button b{font:700 .9rem/1.2 var(--f-d)}
 .plq button[aria-checked="true"]{border-color:var(--green);box-shadow:0 0 0 1px var(--green);background:color-mix(in srgb,var(--green) 8%,var(--paper))}
-.pflip__hint{font-size:.82rem;color:var(--muted);text-align:center;margin:0}
+.pflip__hint{font-size:.82rem;color:#D7EDC9;text-align:center;margin:0}
 .spec{width:100%;border-collapse:collapse;font-size:.96rem}
 .spec th,.spec td{text-align:left;vertical-align:top;padding:.8rem 0;border-bottom:1px solid var(--line)}
 .spec th{width:38%;font:500 .75rem/1.7 var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-right:1rem}
@@ -829,6 +841,10 @@ button{font:inherit;color:inherit}
       <div class="prod__main">
         <div class="pframe"><div class="pflip" id="pflip">
           <img class="pflip__f" src="assets/box-face-front.webp" width="432" height="800" loading="lazy" decoding="async" alt="Nicorette gomme 4 mg Menthe fraîche, 105 gommes, face avant">
+          <img class="pflip__s pflip__r" src="assets/box-face-side.webp" width="392" height="800" loading="lazy" decoding="async" alt="">
+          <img class="pflip__s pflip__l" src="assets/box-face-side.webp" width="392" height="800" loading="lazy" decoding="async" alt="">
+          <img class="pflip__t" src="assets/box-face-top.webp" width="432" height="392" loading="lazy" decoding="async" alt="">
+          <span class="pflip__u"></span>
           <img class="pflip__b" src="assets/box-face-back.webp" width="432" height="800" loading="lazy" decoding="async" alt="Dos de la boîte : indications, posologie en deux étapes, maximum 15 gommes par jour, mise en garde grossesse">
         </div></div>
         <div class="ptabs" role="group" aria-label="Voir la boîte">
