@@ -1308,13 +1308,13 @@ button{font:inherit;color:inherit}
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.batch(".rv", { start: "top 90%", once: true, onEnter: els => gsap.to(els, { opacity: 1, y: 0, duration: .85, ease: "power3.out", stagger: .07 }) });
     ["#curveRaw", "#curveGum"].forEach((id, i) => {
-      const p = $(id), len = p.getTotalLength();
+      const p = $(id); if (!p) return; const len = p.getTotalLength();
       gsap.fromTo(p, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, duration: 2.2, ease: "power2.inOut", delay: i * .35, scrollTrigger: { trigger: ".craving", start: "top 75%" } });
     });
-    gsap.from(".chewbar__track i", { scaleX: 0, duration: 1, ease: "power3.out", stagger: .25, scrollTrigger: { trigger: ".chewbar", start: "top 88%" } });
+    if ($(".chewbar")) gsap.from(".chewbar__track i", { scaleX: 0, duration: 1, ease: "power3.out", stagger: .25, scrollTrigger: { trigger: ".chewbar", start: "top 88%" } });
     const pn = $("#proofN"), o = { v: 0 };
-    gsap.to(o, { v: 60, duration: 1.6, ease: "power2.out", scrollTrigger: { trigger: pn, start: "top 88%" }, onUpdate: () => pn.textContent = "+" + Math.round(o.v) + " %" });
-    gsap.to("#tlFill", { height: () => $("#tl").offsetHeight - 16, ease: "none", scrollTrigger: { trigger: "#tl", start: "top 70%", end: "bottom 60%", scrub: true, invalidateOnRefresh: true } });
+    if (pn) gsap.to(o, { v: 60, duration: 1.6, ease: "power2.out", scrollTrigger: { trigger: pn, start: "top 88%" }, onUpdate: () => pn.textContent = "+" + Math.round(o.v) + " %" });
+    if ($("#tl")) gsap.to("#tlFill", { height: () => $("#tl").offsetHeight - 16, ease: "none", scrollTrigger: { trigger: "#tl", start: "top 70%", end: "bottom 60%", scrub: true, invalidateOnRefresh: true } });
   });
 })();
 </script>
