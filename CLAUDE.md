@@ -9,6 +9,9 @@ Aperçu artifact (https://claude.ai/artifact/7qaKr4LRSiThENTokwnSs3) : il ne cha
 (`assets/xxx.webp`) pour que le script les trouve.
 
 ## Contexte métier
+- Produit unique : Nicorette® gomme 4 mg **Menthe fraîche**, boîte de 105 (7 plaquettes de 15).
+  Prix : 1 boîte 500 DH, 2 boîtes 900 DH, 4 boîtes (3 + 1 offerte) 1 500 DH ; livraison toujours offerte.
+- Posologie affichée = celle de la notice : 8 à 12 gommes/jour au début, puis réduction, 15 max/jour.
 - Marché marocain : COD dominant, confirmation WhatsApp, prix en DH, villes listées dans le formulaire.
 - Langue du site : français, avec touches de darija (script arabe) ; l'utilisateur écrit en français.
 - Produits = médicaments (nicotine) : rester factuel, pas d'allégation de guérison, garder posologie,
