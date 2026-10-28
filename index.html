@@ -172,10 +172,13 @@ button{font:inherit;color:inherit}
 .f--top{transform:rotateX(90deg) translateZ(calc(var(--h)/2))}
 .f--bot{transform:rotateX(-90deg) translateZ(calc(var(--h)/2));background:#1C5C09}
 .box3d__sh{position:absolute;left:0;right:0;top:96%;height:12%;background:radial-gradient(closest-side,rgb(4 30 3/.55),transparent);transform-origin:center;z-index:-1}
-.stage__gum{position:absolute;width:12%;filter:drop-shadow(0 12px 12px rgb(11 31 26/.18))}
-.stage__gum--1{left:7%;bottom:18%;transform:rotate(-18deg)}
-.stage__gum--2{right:8%;top:20%;width:9%;transform:rotate(22deg)}
-.stage__gum--3{right:11%;bottom:14%;width:8%;transform:rotate(8deg)}
+/* Gommes réelles (entières et cassées) qui tournent en même temps que la boîte */
+.stage__gum{position:absolute;width:14%;height:auto;--r:0deg;transform:rotate(var(--r));filter:drop-shadow(0 14px 12px rgb(4 30 3/.45))}
+.stage__gum--1{left:5%;bottom:17%;--r:-16deg}
+.stage__gum--2{right:5%;top:21%;width:17%;--r:12deg}
+.stage__gum--3{right:9%;bottom:15%;width:10%;--r:20deg}
+.stage__gum--4{left:7%;top:36%;width:12%;--r:-28deg}
+@media (max-width:639px){.stage .stage__gum--2{top:31%;right:3%;width:15%}.stage .stage__gum--3{bottom:27%;right:4%}}
 .chip{position:absolute;display:inline-flex;align-items:center;gap:.55rem;background:rgb(255 255 255/.95);color:#0B1F1A;border-radius:14px;padding:.55rem .75rem;font-size:.78rem;line-height:1.25;box-shadow:0 18px 30px -16px rgb(11 31 26/.45);border:1px solid #E6EEE9}
 .chip b{display:block;font:700 .92rem/1.1 var(--f-d)}
 .chip i{width:32px;height:32px;flex:none;border-radius:10px;background:#DDF3E9;color:#0F4A3F;display:grid;place-items:center;font-style:normal}
@@ -466,7 +469,8 @@ button{font:inherit;color:inherit}
   .box3d__sh{animation:boxsh 9s 1.2s ease-in-out infinite}
   .blister__in{animation:blspin 8s 1.5s ease-in-out infinite}
   .mbox__in{animation:mspin 6s calc(1s + var(--i) * .25s) ease-in-out infinite}
-  .stage__gum,.stage__badge,.chip{animation:fade .7s .35s var(--ease) both}
+  .stage__badge,.chip{animation:fade .7s .35s var(--ease) both}
+  .stage__gum{animation:fade .7s .35s var(--ease) both,gumturn 9s 1.2s ease-in-out infinite}
 }
 @keyframes rise{from{transform:translateY(.35em)}}
 @keyframes boxin{from{opacity:0;transform:translateY(4%) scale(.96)}}
@@ -482,6 +486,13 @@ button{font:inherit;color:inherit}
   84%{transform:translateY(0) rotateX(8deg) rotateY(346deg)}
   91%{transform:translateY(0) rotateX(8deg) rotateY(333deg)}
   96%,100%{transform:translateY(0) rotateX(8deg) rotateY(338deg)}}
+/* même minutage que boxturn : repos, demi-tour quand la boîte montre son dos, tour complet */
+@keyframes gumturn{
+  0%,30%{transform:translateY(0) rotate(var(--r))}
+  48%,62%{transform:translateY(-14%) rotate(calc(var(--r) + 180deg))}
+  82%{transform:translateY(0) rotate(calc(var(--r) + 372deg))}
+  90%{transform:translateY(0) rotate(calc(var(--r) + 354deg))}
+  96%,100%{transform:translateY(0) rotate(calc(var(--r) + 360deg))}}
 @keyframes mspin{
   0%,55%{transform:rotateX(-10deg) rotateY(-30deg)}
   80%{transform:rotateX(-10deg) rotateY(338deg)}
@@ -593,9 +604,10 @@ button{font:inherit;color:inherit}
           <span class="f f--bot"></span>
         </div></div>
       </div>
-      <svg class="stage__gum stage__gum--1" aria-hidden="true"><use href="#gum"/></svg>
-      <svg class="stage__gum stage__gum--2" aria-hidden="true"><use href="#gum"/></svg>
-      <svg class="stage__gum stage__gum--3" aria-hidden="true"><use href="#gum"/></svg>
+      <img class="stage__gum stage__gum--1" src="assets/gomme.webp" width="571" height="362" alt="" aria-hidden="true" decoding="async">
+      <img class="stage__gum stage__gum--2" src="assets/gomme-cassee.webp" width="671" height="395" alt="" aria-hidden="true" decoding="async">
+      <img class="stage__gum stage__gum--3" src="assets/gomme.webp" width="571" height="362" alt="" aria-hidden="true" decoding="async">
+      <img class="stage__gum stage__gum--4" src="assets/gomme-cassee.webp" width="671" height="395" alt="" aria-hidden="true" decoding="async">
       <div class="stage__badge" aria-hidden="true"><span><big>+1</big>boîte<br>offerte</span></div>
       <div class="chip chip--a" aria-hidden="true"><i><svg><use href="#i-wave"/></svg></i><span><b>Une envie ?</b>une gomme, elle redescend</span></div>
       <div class="chip chip--b" aria-hidden="true"><i><svg><use href="#i-clock"/></svg></i><span><b>≈ 30 min</b>d'effet par gomme</span></div>
@@ -1188,7 +1200,6 @@ button{font:inherit;color:inherit}
   addEventListener("DOMContentLoaded", () => {
     if (!window.gsap || reduce) { $$(".rv").forEach(el => { el.style.opacity = 1; el.style.transform = "none"; }); return; }
     gsap.registerPlugin(ScrollTrigger);
-    $$(".stage__gum").forEach((g, i) => gsap.to(g, { y: i % 2 ? 10 : -12, rotate: "+=8", duration: 2.6 + i * .4, ease: "sine.inOut", yoyo: true, repeat: -1 }));
     ScrollTrigger.batch(".rv", { start: "top 90%", once: true, onEnter: els => gsap.to(els, { opacity: 1, y: 0, duration: .85, ease: "power3.out", stagger: .07 }) });
     ["#curveRaw", "#curveGum"].forEach((id, i) => {
       const p = $(id), len = p.getTotalLength();
