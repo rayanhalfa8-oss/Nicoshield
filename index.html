@@ -488,6 +488,14 @@ button{font:inherit;color:inherit}
 .wa:hover{transform:scale(1.06)}
 .wa svg{width:28px;height:28px}
 @media (min-width:980px){.wa,.sbar.is-on ~ .wa{bottom:28px}}
+/* Bouton mode clair / sombre : flottant à gauche, toujours visible, hors du flux de la page */
+.thm{position:fixed;left:max(16px,env(safe-area-inset-left));bottom:calc(16px + env(safe-area-inset-bottom));z-index:75;width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 12px 26px -12px rgb(0 0 0/.45);transition:bottom .3s var(--ease),transform .2s var(--ease)}
+.thm:hover{transform:scale(1.06)}
+.thm svg{width:22px;height:22px;grid-area:1/1}
+.thm .thm__sun{display:none}
+.thm.is-dark .thm__sun{display:block}.thm.is-dark .thm__moon{display:none}
+.sbar.is-on ~ .thm{bottom:calc(84px + env(safe-area-inset-bottom))}
+@media (min-width:980px){.thm,.sbar.is-on ~ .thm{bottom:28px}}
 .toast{position:fixed;left:50%;top:84px;z-index:90;transform:translate(-50%,-20px);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);padding:.7rem 1.1rem;border-radius:999px;font-size:.9rem;font-weight:600;transition:opacity .25s,transform .3s var(--ease);white-space:nowrap}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
@@ -576,7 +584,7 @@ button{font:inherit;color:inherit}
 </style>
 </head>
 <body>
-<script>document.documentElement.classList.add("js")</script>
+<script>document.documentElement.classList.add("js");try{var nsT=localStorage.getItem("ns_theme");if(nsT)document.documentElement.dataset.theme=nsT}catch(e){}</script>
 <a class="skip" href="#main">Aller au contenu</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1040,6 +1048,7 @@ button{font:inherit;color:inherit}
   <div><b id="sbarT"></b><small>Paiement à la livraison</small></div>
   <a class="btn btn--p" href="#commande">Commander</a>
 </div>
+<button class="thm" id="thm" type="button" aria-label="Activer le mode sombre" aria-pressed="false"><svg class="thm__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg><svg class="thm__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
 <a class="wa" href="#" data-wa="Salam, je veux des infos sur les produits Nicorette." aria-label="Nous écrire sur WhatsApp"><svg><use href="#i-wa"/></svg></a>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -1098,6 +1107,13 @@ button{font:inherit;color:inherit}
   $$("[data-cfg]").forEach(el => { const v = CONFIG[el.dataset.cfg]; if (v) { el.textContent = v; el.classList.remove("todo"); } });
   $("#yr").textContent = new Date().getFullYear();
   $$("[data-wa]").forEach(a => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+
+  /* Mode clair / sombre (mémorisé) */
+  const thm = $("#thm"), docEl = document.documentElement;
+  const isDark = () => docEl.dataset.theme ? docEl.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const syncThm = () => { const d = isDark(); thm.classList.toggle("is-dark", d); thm.setAttribute("aria-pressed", String(d)); thm.setAttribute("aria-label", d ? "Activer le mode clair" : "Activer le mode sombre"); };
+  thm.onclick = () => { const t = isDark() ? "light" : "dark"; docEl.dataset.theme = t; store.set("ns_theme", t); syncThm(); };
+  syncThm();
 
   /* Porte d'âge */
   const gate = $("#gate");

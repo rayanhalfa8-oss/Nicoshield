@@ -12,10 +12,10 @@ THEME = """<style id="theme-blanc">
   --paper:#FFFFFF; --surface:#FFFFFF; --sunk:#F1F7F3; --line:#DCE9E1; --ink:#0B1F1A; --muted:#4F635B;
   --green:#0F4A3F; --mint-soft:#E3F3EA; --btn:#0F4A3F; --btn-fg:#FFFFFF; --btn-hover:#072A23;
   --shadow:0 1px 2px rgb(7 42 35/.05),0 22px 44px -26px rgb(7 42 35/.28); color-scheme:light}
-body{background:#FFFFFF}
+body{background:var(--paper)}
 .plan,.pc,.calc__card,.order,.mstep,.angle,.promo__it,.pflip,.prod__main,details{border-color:var(--line)}
-.offers{background:linear-gradient(#F1F7F3,#FFFFFF)}
-.ftr{background:#F1F7F3}
+html:not([data-theme="dark"]) .offers{background:linear-gradient(#F1F7F3,#FFFFFF)}
+html:not([data-theme="dark"]) .ftr{background:#F1F7F3}
 </style>"""
 
 assert html.count("<html") == 1 and html.count("</head>") == 1
