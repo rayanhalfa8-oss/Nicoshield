@@ -527,8 +527,8 @@ button{font:inherit;color:inherit}
 </svg>
 
 <div class="ticker" aria-hidden="true"><div class="ticker__track">
-  <span>🎁 4e boîte offerte</span><span>Livraison gratuite dès 2 boîtes</span><span>Paiement à la livraison</span><span>Livraison partout au Maroc</span><span>Conseil WhatsApp en darija</span><span>Emballage discret</span><span>Produits Nicorette® authentiques</span><span>Réservé aux adultes</span>
-  <span>🎁 4e boîte offerte</span><span>Livraison gratuite dès 2 boîtes</span><span>Paiement à la livraison</span><span>Livraison partout au Maroc</span><span>Conseil WhatsApp en darija</span><span>Emballage discret</span><span>Produits Nicorette® authentiques</span><span>Réservé aux adultes</span>
+  <span>🎁 4e boîte offerte</span><span>Livraison gratuite partout au Maroc</span><span>Paiement à la livraison</span><span>Livraison partout au Maroc</span><span>Conseil WhatsApp en darija</span><span>Emballage discret</span><span>Produits Nicorette® authentiques</span><span>Réservé aux adultes</span>
+  <span>🎁 4e boîte offerte</span><span>Livraison gratuite partout au Maroc</span><span>Paiement à la livraison</span><span>Livraison partout au Maroc</span><span>Conseil WhatsApp en darija</span><span>Emballage discret</span><span>Produits Nicorette® authentiques</span><span>Réservé aux adultes</span>
 </div></div>
 
 <header class="hdr" id="hdr">
@@ -815,7 +815,7 @@ button{font:inherit;color:inherit}
 
     <div class="promo rv" role="note" aria-label="Avantages inclus">
       <div class="promo__it"><span class="promo__ic">🎁</span><b>4<sup>e</sup> boîte offerte</b><small>avec le programme 4 boîtes</small></div>
-      <div class="promo__it"><span class="promo__ic">🚚</span><b>Livraison gratuite</b><small>dès 2 boîtes, partout au Maroc</small></div>
+      <div class="promo__it"><span class="promo__ic">🚚</span><b>Livraison gratuite</b><small>dès 1 boîte, partout au Maroc</small></div>
       <div class="promo__it"><span class="promo__ic">💬</span><b>Suivi WhatsApp offert</b><small>conseils en darija pendant le programme</small></div>
       <div class="promo__it"><span class="promo__ic">💵</span><b>0 DH à payer maintenant</b><small>vous payez au livreur, à la réception</small></div>
     </div>
@@ -826,8 +826,8 @@ button{font:inherit;color:inherit}
       <label class="plan" data-plan="1"><input type="radio" name="plan" value="1">
         <div class="plan__top"><div><div class="plan__name">Découverte</div><div class="plan__qty" data-q></div></div><span class="radio" aria-hidden="true"></span></div>
         <div class="plan__boxes" data-boxes></div>
-        <div><div class="plan__price"><b data-p></b><span>DH</span></div><div class="plan__unit">+ 30 DH de livraison</div></div>
-        <ul><li><svg><use href="#i-check"/></svg>Pour tester la méthode</li><li><svg><use href="#i-check"/></svg>Paiement à la livraison</li></ul>
+        <div><div class="plan__price"><b data-p></b><span>DH</span></div><div class="plan__unit">Livraison offerte</div></div>
+        <ul><li><svg><use href="#i-check"/></svg>Pour tester la méthode</li><li><svg><use href="#i-check"/></svg>Livraison offerte</li></ul>
       </label>
       <label class="plan plan--best is-sel" data-plan="4"><input type="radio" name="plan" value="4" checked>
         <span class="plan__tag">Meilleure offre · 1 boîte offerte</span>
@@ -969,8 +969,8 @@ button{font:inherit;color:inherit}
   const CONFIG = {
     whatsapp: "212784267246",
     metaPixelId: "",        // ID Meta Pixel → active PageView, ViewContent, AddToCart, InitiateCheckout, Lead
-    shipFee: 30,            // frais de livraison (DH) sous le seuil — à confirmer
-    freeShipFrom: 900,      // livraison offerte à partir de (DH) — à confirmer
+    shipFee: 0,            // livraison offerte sur toutes les commandes
+    freeShipFrom: 0,      // 0 = pas de seuil (barre de progression masquée)
     amm: ""
   };
   const P = {
@@ -1095,7 +1095,7 @@ button{font:inherit;color:inherit}
     });
     const one = state.tier === "1";
     $("#nudge").hidden = !one;
-    if (one) $("#nudgeT").innerHTML = `Pour seulement <b>${dh(tierPrice(v, "2") - tierPrice(v, "1") - CONFIG.shipFee)}</b> de plus, recevez 2 boîtes : 100 DH d'économie et la livraison offerte.`;
+    if (one) $("#nudgeT").innerHTML = `Pour seulement <b>${dh(tierPrice(v, "2") - tierPrice(v, "1") - CONFIG.shipFee)}</b> de plus, recevez 2 boîtes et économisez 100 DH.`;
 
     const { L, sub, save, ship, tot } = totals();
     $("#lines").innerHTML = L.map(l => `<li>${img(l.img)}<span>${l.label}<small>${l.sub}</small></span><b>${dh(l.price)}</b></li>`).join("");
