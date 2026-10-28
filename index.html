@@ -297,11 +297,11 @@ button{font:inherit;color:inherit}
 .pblis{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:1.1rem 1.2rem}
 .blister{--bw:clamp(96px,26vw,140px);--bh:calc(var(--bw)*882/534);--bt:5px;position:relative;width:calc(var(--bw)*1.25);height:calc(var(--bh)*1.08);perspective:900px;display:grid;place-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .blister__spin{position:relative;width:var(--bw);height:var(--bh);transform-style:preserve-3d}
-.blister__in{position:relative;width:var(--bw);height:var(--bh);transform-style:preserve-3d;transform:rotateX(8deg) rotateY(-22deg)}
+.blister__in{position:relative;width:var(--bw);height:var(--bh);transform-style:preserve-3d;transform:rotateY(-22deg) rotateX(8deg)}
 .bf{position:absolute;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .bf--front,.bf--back{inset:0;width:100%;height:100%}
 .bf--front{transform:translateZ(calc(var(--bt)/2))}
-.bf--back{transform:rotateY(180deg) translateZ(calc(var(--bt)/2))}
+.bf--back{transform:rotateX(180deg) translateZ(calc(var(--bt)/2))}
 .bf--r,.bf--l{top:4%;height:92%;width:var(--bt);left:50%;margin-left:calc(var(--bt)/-2);background:linear-gradient(#8E959B,#6E757B)}
 .bf--r{transform:rotateY(90deg) translateZ(calc(var(--bw)/2 - 1px))}
 .bf--l{transform:rotateY(-90deg) translateZ(calc(var(--bw)/2 - 1px))}
@@ -480,13 +480,13 @@ button{font:inherit;color:inherit}
   82%{transform:translateY(0) rotateX(-10deg) rotateY(338deg)}
   90%{transform:translateY(0) rotateX(-10deg) rotateY(326deg)}
   96%,100%{transform:translateY(0) rotateX(-10deg) rotateY(330deg)}}
+/* la plaquette se retourne de haut en bas, comme en vrai (le verso se lit à l'endroit) */
 @keyframes blspin{
-  0%,30%{transform:translateY(0) rotateX(8deg) rotateY(-22deg)}
-  50%,64%{transform:translateY(-4%) rotateX(4deg) rotateY(158deg)}
-  84%{transform:translateY(0) rotateX(8deg) rotateY(346deg)}
-  91%{transform:translateY(0) rotateX(8deg) rotateY(333deg)}
-  96%,100%{transform:translateY(0) rotateX(8deg) rotateY(338deg)}}
-/* même minutage que boxturn : repos, demi-tour quand la boîte montre son dos, tour complet */
+  0%,30%{transform:translateY(0) rotateY(-22deg) rotateX(8deg)}
+  50%,64%{transform:translateY(-4%) rotateY(-14deg) rotateX(176deg)}
+  84%{transform:translateY(0) rotateY(-22deg) rotateX(374deg)}
+  91%{transform:translateY(0) rotateY(-22deg) rotateX(363deg)}
+  96%,100%{transform:translateY(0) rotateY(-22deg) rotateX(368deg)}}
 @keyframes gumturn{
   0%,30%{transform:translateY(0) rotate(var(--r))}
   48%,62%{transform:translateY(-14%) rotate(calc(var(--r) + 180deg))}
@@ -777,7 +777,7 @@ button{font:inherit;color:inherit}
         <p class="pflip__hint" id="pflipHint" aria-live="polite">La boîte authentique, scellée, telle que vous la recevez.</p>
       </div>
       <div class="pblis">
-        <div class="blister" id="blister" role="img" aria-label="Plaquette de 15 gommes Nicorette, recto et verso aluminium">
+        <div class="blister" id="blister" role="img" aria-label="Plaquette de 15 gommes Nicorette 4 mg : recto avec les gommes, verso aluminium imprimé">
           <div class="blister__spin" id="blisSpin"><div class="blister__in">
             <img class="bf bf--front" src="assets/blister-front.webp" width="534" height="882" alt="" loading="lazy" decoding="async">
             <img class="bf bf--back" src="assets/blister-back.webp" width="534" height="882" alt="" loading="lazy" decoding="async">
@@ -1047,7 +1047,7 @@ button{font:inherit;color:inherit}
   });
 
   const blisSpin = $("#blisSpin");
-  $("#blister").addEventListener("click", () => { if (!reduce && blisSpin.animate) blisSpin.animate([{ transform: "rotateY(0)" }, { transform: "rotateY(360deg)" }], { duration: 1100, easing: "cubic-bezier(.2,.8,.2,1)" }); });
+  $("#blister").addEventListener("click", () => { if (!reduce && blisSpin.animate) blisSpin.animate([{ transform: "rotateX(0)" }, { transform: "rotateX(360deg)" }], { duration: 1100, easing: "cubic-bezier(.2,.8,.2,1)" }); });
 
   /* En-tête, menu, barre mobile */
   const hdr = $("#hdr"), sbar = $("#sbar"), waFab = $(".wa"), hero = $(".hero"), order = $("#commande");
