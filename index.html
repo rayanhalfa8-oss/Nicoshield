@@ -322,6 +322,7 @@ button{font:inherit;color:inherit}
 .pblis__txt{display:grid;gap:.35rem}
 .pblis__txt b{font:800 1.25rem/1.15 var(--f-d);letter-spacing:-.02em}
 .pblis__txt p{margin:0;font-size:.9rem;color:var(--muted)}
+.pblis--offer{margin-top:1.6rem}
 .plq{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.35rem}
 .plq button{flex:1 1 0;min-width:0}
 @media (max-width:519px){.pblis{grid-template-columns:1fr;justify-items:center;text-align:center}.pblis .blister{--bw:88px}.plq{width:100%}.plq button{text-align:center;justify-items:center;padding:.45rem .3rem}}
@@ -889,6 +890,25 @@ button{font:inherit;color:inherit}
         <ul><li><svg><use href="#i-check"/></svg>100 DH d'économie</li><li><svg><use href="#i-check"/></svg>Livraison offerte</li></ul>
       </label>
     </div>
+    <div class="pblis pblis--offer rv">
+        <div class="blister" id="blister" role="img" aria-label="Plaquette de 15 gommes Nicorette 4 mg : recto avec les gommes, verso aluminium imprimé">
+          <div class="blister__spin" id="blisSpin"><div class="blister__in">
+            <img class="bf bf--front" src="assets/blister-front.webp" width="534" height="882" alt="" loading="lazy" decoding="async">
+            <img class="bf bf--back" src="assets/blister-back.webp" width="534" height="882" alt="" loading="lazy" decoding="async">
+            <span class="bf bf--r"></span><span class="bf bf--l"></span><span class="bf bf--t"></span><span class="bf bf--b"></span>
+          </div></div>
+        </div>
+        <div class="pblis__txt">
+          <span class="eyebrow">En plus de vos boîtes</span>
+          <b>Plaquette de 15 gommes</b>
+          <p>La même gomme 4 mg Menthe fraîche, en plaquette scellée de 15. Pratique pour la poche, la voiture ou le bureau.</p>
+          <div class="plq" role="radiogroup" aria-label="Plaquettes en plus">
+            <button type="button" role="radio" aria-checked="true" data-plq="0">Non merci</button>
+            <button type="button" role="radio" aria-checked="false" data-plq="1"><b>1 plaquette</b>80 DH</button>
+            <button type="button" role="radio" aria-checked="false" data-plq="2"><b>2 plaquettes</b>150 DH</button>
+          </div>
+        </div>
+    </div>
     <div class="nudge" id="nudge" hidden><span id="nudgeT"></span><button class="btn btn--p btn--sm" type="button" id="nudgeBtn">Passer à 2 boîtes</button></div>
 
     <div class="guar">
@@ -915,25 +935,6 @@ button{font:inherit;color:inherit}
         <div class="oline oline--tot"><span>À payer à la livraison</span><b id="sTot"></b></div>
       </div>
       <form id="form" novalidate>
-        <div class="pblis">
-        <div class="blister" id="blister" role="img" aria-label="Plaquette de 15 gommes Nicorette 4 mg : recto avec les gommes, verso aluminium imprimé">
-          <div class="blister__spin" id="blisSpin"><div class="blister__in">
-            <img class="bf bf--front" src="assets/blister-front.webp" width="534" height="882" alt="" loading="lazy" decoding="async">
-            <img class="bf bf--back" src="assets/blister-back.webp" width="534" height="882" alt="" loading="lazy" decoding="async">
-            <span class="bf bf--r"></span><span class="bf bf--l"></span><span class="bf bf--t"></span><span class="bf bf--b"></span>
-          </div></div>
-        </div>
-        <div class="pblis__txt">
-          <span class="eyebrow">À ajouter à votre commande</span>
-          <b>Plaquette de 15 gommes</b>
-          <p>La même gomme 4 mg Menthe fraîche, en plaquette scellée de 15. Pratique pour la poche, la voiture ou le bureau.</p>
-          <div class="plq" role="radiogroup" aria-label="Plaquettes en plus">
-            <button type="button" role="radio" aria-checked="true" data-plq="0">Non merci</button>
-            <button type="button" role="radio" aria-checked="false" data-plq="1"><b>1 plaquette</b>80 DH</button>
-            <button type="button" role="radio" aria-checked="false" data-plq="2"><b>2 plaquettes</b>150 DH</button>
-          </div>
-        </div>
-        </div>
         <div class="row2">
           <div class="inp"><label for="fName">Nom et prénom</label><input id="fName" name="name" autocomplete="name" required><span class="err" hidden>Indiquez votre nom.</span></div>
           <div class="inp"><label for="fTel">Téléphone</label><input id="fTel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="06 12 34 56 78" required><span class="err" hidden>Numéro marocain valide (06, 07 ou 05).</span></div>
