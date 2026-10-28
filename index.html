@@ -322,6 +322,12 @@ button{font:inherit;color:inherit}
 .pblis__txt{display:grid;gap:.35rem}
 .pblis__txt b{font:800 1.25rem/1.15 var(--f-d);letter-spacing:-.02em}
 .pblis__txt p{margin:0;font-size:.9rem;color:var(--muted)}
+.plq{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.35rem}
+.plq button{flex:1 1 0;min-width:0}
+@media (max-width:519px){.pblis{grid-template-columns:1fr;justify-items:center;text-align:center}.pblis .blister{--bw:88px}.plq{width:100%}.plq button{text-align:center;justify-items:center;padding:.45rem .3rem}}
+.plq button{min-height:44px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:14px;padding:.45rem .75rem;font:500 .85rem/1.2 var(--f-b);cursor:pointer;display:grid;text-align:left}
+.plq button b{font:700 .9rem/1.2 var(--f-d)}
+.plq button[aria-checked="true"]{border-color:var(--green);box-shadow:0 0 0 1px var(--green);background:color-mix(in srgb,var(--green) 8%,var(--paper))}
 .pflip__hint{font-size:.82rem;color:var(--muted);text-align:center;margin:0}
 .spec{width:100%;border-collapse:collapse;font-size:.96rem}
 .spec th,.spec td{text-align:left;vertical-align:top;padding:.8rem 0;border-bottom:1px solid var(--line)}
@@ -816,20 +822,6 @@ button{font:inherit;color:inherit}
         </div>
         <p class="pflip__hint" id="pflipHint" aria-live="polite">La boîte authentique, scellée, telle que vous la recevez.</p>
       </div>
-      <div class="pblis">
-        <div class="blister" id="blister" role="img" aria-label="Plaquette de 15 gommes Nicorette 4 mg : recto avec les gommes, verso aluminium imprimé">
-          <div class="blister__spin" id="blisSpin"><div class="blister__in">
-            <img class="bf bf--front" src="assets/blister-front.webp" width="534" height="882" alt="" loading="lazy" decoding="async">
-            <img class="bf bf--back" src="assets/blister-back.webp" width="534" height="882" alt="" loading="lazy" decoding="async">
-            <span class="bf bf--r"></span><span class="bf bf--l"></span><span class="bf bf--t"></span><span class="bf bf--b"></span>
-          </div></div>
-        </div>
-        <div class="pblis__txt">
-          <span class="eyebrow">Dans chaque boîte</span>
-          <b>7 plaquettes de 15 gommes</b>
-          <p>105 gommes sans sucre, chacune protégée dans son alvéole scellée. Une plaquette se glisse dans la poche, le sac ou la voiture.</p>
-        </div>
-      </div>
     </div>
     <div>
       <div class="head" style="margin-bottom:1.6rem">
@@ -923,6 +915,25 @@ button{font:inherit;color:inherit}
         <div class="oline oline--tot"><span>À payer à la livraison</span><b id="sTot"></b></div>
       </div>
       <form id="form" novalidate>
+        <div class="pblis">
+        <div class="blister" id="blister" role="img" aria-label="Plaquette de 15 gommes Nicorette 4 mg : recto avec les gommes, verso aluminium imprimé">
+          <div class="blister__spin" id="blisSpin"><div class="blister__in">
+            <img class="bf bf--front" src="assets/blister-front.webp" width="534" height="882" alt="" loading="lazy" decoding="async">
+            <img class="bf bf--back" src="assets/blister-back.webp" width="534" height="882" alt="" loading="lazy" decoding="async">
+            <span class="bf bf--r"></span><span class="bf bf--l"></span><span class="bf bf--t"></span><span class="bf bf--b"></span>
+          </div></div>
+        </div>
+        <div class="pblis__txt">
+          <span class="eyebrow">À ajouter à votre commande</span>
+          <b>Plaquette de 15 gommes</b>
+          <p>La même gomme 4 mg Menthe fraîche, en plaquette scellée de 15. Pratique pour la poche, la voiture ou le bureau.</p>
+          <div class="plq" role="radiogroup" aria-label="Plaquettes en plus">
+            <button type="button" role="radio" aria-checked="true" data-plq="0">Non merci</button>
+            <button type="button" role="radio" aria-checked="false" data-plq="1"><b>1 plaquette</b>80 DH</button>
+            <button type="button" role="radio" aria-checked="false" data-plq="2"><b>2 plaquettes</b>150 DH</button>
+          </div>
+        </div>
+        </div>
         <div class="row2">
           <div class="inp"><label for="fName">Nom et prénom</label><input id="fName" name="name" autocomplete="name" required><span class="err" hidden>Indiquez votre nom.</span></div>
           <div class="inp"><label for="fTel">Téléphone</label><input id="fTel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="06 12 34 56 78" required><span class="err" hidden>Numéro marocain valide (06, 07 ou 05).</span></div>
@@ -1026,6 +1037,7 @@ button{font:inherit;color:inherit}
     amm: ""
   };
   const P = {
+    plq:  { name: "Plaquette 4 mg · Menthe fraîche", img: "assets/blister-front.webp" },
     g4mg: { name: "Gomme 4 mg · Menthe fraîche", short: "4 mg Menthe fraîche", unit: "105 gommes", img: "assets/box-4mg-front.webp", price: 500 }
   };
   const TRIGGERS = {
@@ -1112,7 +1124,8 @@ button{font:inherit;color:inherit}
   showT("cafe");
 
   /* ===== Panier ===== */
-  const state = { v: "g4mg", tier: "4" };
+  const state = { v: "g4mg", tier: "4", plq: 0 };
+  const PLQ = { 1: 80, 2: 150 };
   const TIERS = { "1": { boxes: 1, paid: 1 }, "2": { boxes: 2, paid: 2 }, "4": { boxes: 4, paid: 3 } };
   const tierPrice = (v, t) => { const p = P[v].price; return t === "1" ? p : t === "2" ? 2 * p - 100 : 3 * p; };
   const tierWas = (v, t) => P[v].price * TIERS[t].boxes;
@@ -1120,7 +1133,8 @@ button{font:inherit;color:inherit}
   const lines = () => {
     const L = [];
     const t = TIERS[state.tier], pr = tierPrice(state.v, state.tier);
-    L.push({ key: "main", img: state.v, label: `Nicorette® ${P[state.v].name}`, sub: state.tier === "4" ? "3 boîtes + 1 offerte" : `${t.boxes} boîte${t.boxes > 1 ? "s" : ""}`, qty: t.boxes, price: pr, was: tierWas(state.v, state.tier) });
+    if (state.plq) L.push({ key: "plq", img: "plq", label: `Nicorette® ${P.plq.name}`, sub: `${state.plq} plaquette${state.plq > 1 ? "s" : ""} de 15 gommes`, qty: state.plq, price: PLQ[state.plq], was: 80 * state.plq });
+    L.unshift({ key: "main", img: state.v, label: `Nicorette® ${P[state.v].name}`, sub: state.tier === "4" ? "3 boîtes + 1 offerte" : `${t.boxes} boîte${t.boxes > 1 ? "s" : ""}`, qty: t.boxes, price: pr, was: tierWas(state.v, state.tier) });
     return L;
   };
   const totals = () => {
@@ -1128,6 +1142,12 @@ button{font:inherit;color:inherit}
     const ship = CONFIG.freeShipFrom && sub >= CONFIG.freeShipFrom ? 0 : CONFIG.shipFee;
     return { L, sub, save: was - sub, ship, tot: sub + ship };
   };
+
+  /* Plaquettes en plus */
+  $$(".plq button").forEach(b => b.onclick = () => {
+    state.plq = +b.dataset.plq; $$(".plq button").forEach(x => x.setAttribute("aria-checked", String(x === b))); render();
+    if (state.plq) { toast(`Ajouté : ${state.plq} plaquette${state.plq > 1 ? "s" : ""}`); track("AddToCart", { content_name: "Plaquette", value: PLQ[state.plq], currency: "MAD" }); }
+  });
 
   /* Paliers */
   $$(".plan input").forEach(i => i.addEventListener("change", () => { state.tier = i.value; render(); track("AddToCart", { value: tierPrice(state.v, state.tier), currency: "MAD" }); }));
