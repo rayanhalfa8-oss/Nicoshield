@@ -322,7 +322,11 @@ button{font:inherit;color:inherit}
 .pblis__txt{display:grid;gap:.35rem}
 .pblis__txt b{font:800 1.25rem/1.15 var(--f-d);letter-spacing:-.02em}
 .pblis__txt p{margin:0;font-size:.9rem;color:var(--muted)}
-.pblis--offer{margin-top:1.6rem}
+.plq__h{display:block;font:650 1.05rem/1.2 var(--f-d);margin:2.4rem 0 1.6rem}
+.mblis{--h:66px;--w:calc(var(--h)*534/882);position:relative;width:calc(var(--w) + 14px);height:calc(var(--h) + 8px);perspective:420px;display:grid;place-items:center}
+.mblis__in{position:relative;width:var(--w);height:var(--h);transform-style:preserve-3d;transform:rotateY(-24deg) rotateX(8deg)}
+.mblis img{position:absolute;inset:0;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(1px)}
+.mblis img.b{transform:rotateX(180deg) translateZ(1px)}
 .plq{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.35rem}
 .plq button{flex:1 1 0;min-width:0}
 @media (max-width:519px){.pblis{grid-template-columns:1fr;justify-items:center;text-align:center}.pblis .blister{--bw:88px}.plq{width:100%}.plq button{text-align:center;justify-items:center;padding:.45rem .3rem}}
@@ -489,6 +493,7 @@ button{font:inherit;color:inherit}
   .bx-gum{animation:bxgum 12s 1.2s ease-in-out infinite}
   .box3d__sh{animation:boxsh 12s 1.2s ease-in-out infinite}
   .blister__in{animation:blspin 8s 1.5s ease-in-out infinite}
+  .mblis__in{animation:mflip 6s calc(1.4s + var(--i) * .3s) ease-in-out infinite}
   .mbox__in{animation:mspin 6s calc(1s + var(--i) * .25s) ease-in-out infinite}
   .stage__badge,.chip{animation:fade .7s .35s var(--ease) both}
   .stage__gum{animation:fade .7s .35s var(--ease) both,gumturn 12s 1.2s ease-in-out infinite}
@@ -534,6 +539,11 @@ button{font:inherit;color:inherit}
   96%{transform:translateY(-6%) rotate(calc(var(--r) + 372deg))}
   98.5%{transform:translateY(0) rotate(calc(var(--r) + 354deg))}
   100%{transform:translateY(0) rotate(calc(var(--r) + 360deg))}}
+@keyframes mflip{
+  0%,55%{transform:rotateY(-24deg) rotateX(8deg)}
+  80%{transform:rotateY(-24deg) rotateX(374deg)}
+  88%{transform:rotateY(-24deg) rotateX(362deg)}
+  94%,100%{transform:rotateY(-24deg) rotateX(368deg)}}
 @keyframes mspin{
   0%,55%{transform:rotateX(-10deg) rotateY(-30deg)}
   80%{transform:rotateX(-10deg) rotateY(338deg)}
@@ -890,24 +900,28 @@ button{font:inherit;color:inherit}
         <ul><li><svg><use href="#i-check"/></svg>100 DH d'économie</li><li><svg><use href="#i-check"/></svg>Livraison offerte</li></ul>
       </label>
     </div>
-    <div class="pblis pblis--offer rv">
-        <div class="blister" id="blister" role="img" aria-label="Plaquette de 15 gommes Nicorette 4 mg : recto avec les gommes, verso aluminium imprimé">
-          <div class="blister__spin" id="blisSpin"><div class="blister__in">
-            <img class="bf bf--front" src="assets/blister-front.webp" width="534" height="882" alt="" loading="lazy" decoding="async">
-            <img class="bf bf--back" src="assets/blister-back.webp" width="534" height="882" alt="" loading="lazy" decoding="async">
-            <span class="bf bf--r"></span><span class="bf bf--l"></span><span class="bf bf--t"></span><span class="bf bf--b"></span>
-          </div></div>
-        </div>
-        <div class="pblis__txt">
-          <span class="eyebrow">En plus de vos boîtes</span>
-          <b>Plaquette de 15 gommes</b>
-          <p>La même gomme 4 mg Menthe fraîche, en plaquette scellée de 15. Pratique pour la poche, la voiture ou le bureau.</p>
-          <div class="plq" role="radiogroup" aria-label="Plaquettes en plus">
-            <button type="button" role="radio" aria-checked="true" data-plq="0">Non merci</button>
-            <button type="button" role="radio" aria-checked="false" data-plq="1"><b>1 plaquette</b>80 DH</button>
-            <button type="button" role="radio" aria-checked="false" data-plq="2"><b>2 plaquettes</b>150 DH</button>
-          </div>
-        </div>
+    <b class="plq__h">En plus de vos boîtes : des plaquettes de 15 gommes</b>
+    <div class="plans plans--plq" role="radiogroup" aria-label="Plaquettes en plus">
+      <label class="plan is-sel" data-plq="0"><input type="radio" name="plq" value="0" checked>
+        <div class="plan__top"><div><div class="plan__name">Sans plaquette</div><div class="plan__qty">Boîtes uniquement</div></div><span class="radio" aria-hidden="true"></span></div>
+        <div class="plan__boxes"></div>
+        <div><div class="plan__price"><b>0</b><span>DH</span></div><div class="plan__unit">Rien à ajouter</div></div>
+        <ul><li><svg><use href="#i-check"/></svg>Vos boîtes, rien de plus</li></ul>
+      </label>
+      <label class="plan" data-plq="1"><input type="radio" name="plq" value="1">
+        <div class="plan__top"><div><div class="plan__name">1 plaquette</div><div class="plan__qty">15 gommes</div></div><span class="radio" aria-hidden="true"></span></div>
+        <div class="plan__boxes"><span class="mblis" style="--i:0" aria-hidden="true"><span class="mblis__in"><img src="assets/blister-front.webp" alt=""><img class="b" src="assets/blister-back.webp" alt=""></span></span></div>
+        <div><div class="plan__price"><b>80</b><span>DH</span></div><div class="plan__unit">5,33 DH la gomme</div></div>
+        <ul><li><svg><use href="#i-check"/></svg>Dans la poche ou la voiture</li><li><svg><use href="#i-check"/></svg>Livrée avec vos boîtes</li></ul>
+      </label>
+      <label class="plan" data-plq="2"><input type="radio" name="plq" value="2">
+        <span class="plan__tag">Meilleur prix</span>
+        <div class="plan__top"><div><div class="plan__name">2 plaquettes</div><div class="plan__qty">30 gommes</div></div><span class="radio" aria-hidden="true"></span></div>
+        <div class="plan__boxes"><span class="mblis" style="--i:0" aria-hidden="true"><span class="mblis__in"><img src="assets/blister-front.webp" alt=""><img class="b" src="assets/blister-back.webp" alt=""></span></span><span class="mblis" style="--i:1" aria-hidden="true"><span class="mblis__in"><img src="assets/blister-front.webp" alt=""><img class="b" src="assets/blister-back.webp" alt=""></span></span></div>
+        <div><div class="plan__price"><b>150</b><span>DH</span><s>160 DH</s></div><div class="plan__unit">75 DH la plaquette · 5 DH la gomme</div></div>
+        <span class="plan__save">Vous économisez 10 DH</span>
+        <ul><li><svg><use href="#i-check"/></svg>Une au travail, une à la maison</li><li><svg><use href="#i-check"/></svg>Livrées avec vos boîtes</li></ul>
+      </label>
     </div>
     <div class="nudge" id="nudge" hidden><span id="nudgeT"></span><button class="btn btn--p btn--sm" type="button" id="nudgeBtn">Passer à 2 boîtes</button></div>
 
@@ -1099,8 +1113,6 @@ button{font:inherit;color:inherit}
     pf.classList.toggle("is-z");
   });
 
-  const blisSpin = $("#blisSpin");
-  $("#blister").addEventListener("click", () => { if (!reduce && blisSpin.animate) blisSpin.animate([{ transform: "rotateX(0)" }, { transform: "rotateX(360deg)" }], { duration: 1100, easing: "cubic-bezier(.2,.8,.2,1)" }); });
 
   /* En-tête, menu, barre mobile */
   const hdr = $("#hdr"), sbar = $("#sbar"), waFab = $(".wa"), hero = $(".hero"), order = $("#commande");
@@ -1144,19 +1156,19 @@ button{font:inherit;color:inherit}
     return { L, sub, save: was - sub, ship, tot: sub + ship };
   };
 
-  /* Plaquettes en plus */
-  $$(".plq button").forEach(b => b.onclick = () => {
-    state.plq = +b.dataset.plq; $$(".plq button").forEach(x => x.setAttribute("aria-checked", String(x === b))); render();
+  /* Plaquettes en plus (cartes au même format que les packs) */
+  $$(".plan input[name=plq]").forEach(i => i.addEventListener("change", () => {
+    state.plq = +i.value; $$(".plan[data-plq]").forEach(c => c.classList.toggle("is-sel", c.dataset.plq === i.value)); render();
     if (state.plq) { toast(`Ajouté : ${state.plq} plaquette${state.plq > 1 ? "s" : ""}`); track("AddToCart", { content_name: "Plaquette", value: PLQ[state.plq], currency: "MAD" }); }
-  });
+  }));
 
   /* Paliers */
-  $$(".plan input").forEach(i => i.addEventListener("change", () => { state.tier = i.value; render(); track("AddToCart", { value: tierPrice(state.v, state.tier), currency: "MAD" }); }));
+  $$(".plan input[name=plan]").forEach(i => i.addEventListener("change", () => { state.tier = i.value; render(); track("AddToCart", { value: tierPrice(state.v, state.tier), currency: "MAD" }); }));
   $("#nudgeBtn").onclick = () => { $('.plan input[value="2"]').checked = true; state.tier = "2"; render(); toast("Passé à 2 boîtes · 100 DH économisés"); };
 
   function render() {
     const v = state.v;
-    $$(".plan").forEach(pl => {
+    $$(".plan[data-plan]").forEach(pl => {
       const t = pl.dataset.plan, T = TIERS[t], pr = tierPrice(v, t), was = tierWas(v, t);
       pl.classList.toggle("is-sel", t === state.tier);
       $("[data-q]", pl).textContent = `${T.boxes} boîte${T.boxes > 1 ? "s" : ""}${t === "4" ? " (3 + 1 offerte)" : ""} · ${105 * T.boxes} gommes`;
