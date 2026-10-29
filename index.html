@@ -184,9 +184,17 @@ button{font:inherit;color:inherit}
 .bx-fl{position:absolute;top:50%;width:36%;height:var(--d);margin-top:calc(var(--d)/-2);background:#F3F3EF;border:1px solid #E1E2DC;box-sizing:border-box}
 .bx-fl--l{left:0;transform-origin:0 50%;transform:rotateX(90deg) translateZ(calc(var(--h)/2 - 2px)) rotateY(0)}
 .bx-fl--r{right:0;transform-origin:100% 50%;transform:rotateX(90deg) translateZ(calc(var(--h)/2 - 2px)) rotateY(0)}
+/* intérieur de la boîte : carton blanc comme la vraie (parois vues de l'intérieur) */
+.f-in{position:absolute;display:block;background:linear-gradient(#FFFFFF,#E6E7E1 70%,#D6D8D1);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.f-in--f,.f-in--b{left:0;top:0;width:100%;height:100%}
+.f-in--f{transform:rotateY(180deg) translateZ(calc(var(--d)/-2 + 1px))}
+.f-in--b{transform:translateZ(calc(var(--d)/-2 + 1px));background:linear-gradient(#F4F4F0,#DDDED8 70%)}
+.f-in--l,.f-in--r{top:0;left:50%;width:var(--d);height:100%;margin-left:calc(var(--d)/-2)}
+.f-in--l{transform:rotateY(90deg) translateZ(calc(var(--w)/-2 + 1px));background:linear-gradient(90deg,#ECEDE8,#FAFAF7)}
+.f-in--r{transform:rotateY(-90deg) translateZ(calc(var(--w)/-2 + 1px));background:linear-gradient(90deg,#FAFAF7,#E2E3DD)}
 /* les 6 autres plaquettes rangées debout derrière / devant celle qui sort */
 .bx-stk{position:absolute;left:4%;top:6%;width:92%;aspect-ratio:534/882;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.f--hole{left:0;top:50%;width:100%;height:var(--d);margin-top:calc(var(--d)/-2);transform:rotateX(90deg) translateZ(calc(var(--h)/2 - var(--h)*.16));background:#2A2F2C}
+.f--hole{left:0;top:50%;width:100%;height:var(--d);margin-top:calc(var(--d)/-2);transform:rotateX(90deg) translateZ(calc(var(--h)/2 - var(--h)*.16));background:linear-gradient(#E4E5DF,#CFD1CA)}
 .f--top,.f--bot{left:0;top:50%;width:100%;height:var(--d);margin-top:calc(var(--d)/-2)}
 .f--top{transform:rotateX(90deg) translateZ(calc(var(--h)/2))}
 .f--bot{transform:rotateX(-90deg) translateZ(calc(var(--h)/2));background:#1C5C09}
@@ -700,6 +708,7 @@ button{font:inherit;color:inherit}
           <img class="f f--side f--right" src="assets/box-face-side.webp" width="392" height="800" alt="" decoding="async">
           <img class="f f--side f--left" src="assets/box-face-side.webp" width="392" height="800" alt="" decoding="async">
           <span class="f f--hole"></span>
+          <span class="f-in f-in--f"></span><span class="f-in f-in--b"></span><span class="f-in f-in--l"></span><span class="f-in f-in--r"></span>
           <div class="bx-lid"><img class="lid-out" src="assets/box-face-top.webp" width="432" height="392" alt="" decoding="async"><span class="lid-in"></span><span class="lid-tg"></span></div>
           <span class="bx-fl bx-fl--l"></span><span class="bx-fl bx-fl--r"></span>
           <img class="bx-stk" style="transform:translateZ(calc(var(--d)*-3/8))" src="assets/blister-front.webp" alt="" decoding="async">
