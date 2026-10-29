@@ -176,8 +176,16 @@ button{font:inherit;color:inherit}
 /* Rabat du dessus, charnière sur l'arête arrière : il s'ouvre avant que la plaquette sorte */
 .bx-lid{position:absolute;left:0;top:0;width:100%;height:var(--d);transform-style:preserve-3d;transform-origin:50% 0;transform:translateZ(calc(var(--d)/-2)) rotateX(90deg)}
 .bx-lid>*{position:absolute;inset:0;width:100%;height:100%;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.lid-in{transform:rotateX(180deg);background:linear-gradient(#DCD6C4,#BDB59F)}
-.f--hole{left:0;top:50%;width:100%;height:var(--d);margin-top:calc(var(--d)/-2);transform:rotateX(90deg) translateZ(calc(var(--h)/2 - 3px));background:radial-gradient(80% 90% at 50% 40%,#1D3B10,#07160A)}
+.lid-in{transform:rotateX(180deg);background:linear-gradient(#FBFBF8,#E9EAE4)}
+/* languette blanche du rabat (code-barres) : rentrée dans la boîte quand c'est fermé */
+.bx-lid>.lid-tg{inset:auto;left:3%;top:100%;width:94%;height:30%;transform-origin:50% 0;transform:rotateX(-100deg);backface-visibility:visible;-webkit-backface-visibility:visible;border-radius:0 0 6px 6px;background:repeating-linear-gradient(90deg,#222 0 2px,transparent 2px 4px,#222 4px 5px,transparent 5px 8px) 62% 30%/30% 34% no-repeat,#F6F6F2}
+/* rabats blancs latéraux (anti-poussière), charnière sur les bords gauche et droit */
+.bx-fl{position:absolute;top:50%;width:36%;height:var(--d);margin-top:calc(var(--d)/-2);background:#F3F3EF;border:1px solid #E1E2DC;box-sizing:border-box}
+.bx-fl--l{left:0;transform-origin:0 50%;transform:rotateX(90deg) translateZ(calc(var(--h)/2 - 2px)) rotateY(0)}
+.bx-fl--r{right:0;transform-origin:100% 50%;transform:rotateX(90deg) translateZ(calc(var(--h)/2 - 2px)) rotateY(0)}
+/* les 6 autres plaquettes rangées debout derrière / devant celle qui sort */
+.bx-stk{position:absolute;left:4%;top:6%;width:92%;aspect-ratio:534/882;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.f--hole{left:0;top:50%;width:100%;height:var(--d);margin-top:calc(var(--d)/-2);transform:rotateX(90deg) translateZ(calc(var(--h)/2 - var(--h)*.16));background:#2A2F2C}
 .f--top,.f--bot{left:0;top:50%;width:100%;height:var(--d);margin-top:calc(var(--d)/-2)}
 .f--top{transform:rotateX(90deg) translateZ(calc(var(--h)/2))}
 .f--bot{transform:rotateX(-90deg) translateZ(calc(var(--h)/2));background:#1C5C09}
@@ -513,6 +521,9 @@ button{font:inherit;color:inherit}
   .box3d__in{animation:boxturn 12s 1.2s ease-in-out infinite}
   .bx-blis{animation:bxblis 12s 1.2s ease-in-out infinite}
   .bx-lid{animation:bxlid 12s 1.2s ease-in-out infinite}
+  .lid-tg{animation:bxtg 12s 1.2s ease-in-out infinite}
+  .bx-fl--l{animation:bxfll 12s 1.2s ease-in-out infinite}
+  .bx-fl--r{animation:bxflr 12s 1.2s ease-in-out infinite}
   .bx-gum{animation:bxgum 12s 1.2s ease-in-out infinite}
   .box3d__sh{animation:boxsh 12s 1.2s ease-in-out infinite}
   .blister__in{animation:blspin 8s 1.5s ease-in-out infinite}
@@ -527,20 +538,32 @@ button{font:inherit;color:inherit}
    68-80 la plaquette rentre · 86-100 la boîte fait son tour de 360° et revient à sa place */
 @keyframes boxturn{
   0%,6%{transform:translateY(0) rotateX(-10deg) rotateY(-30deg)}
-  12%,82%{transform:translateY(16%) rotateX(-16deg) rotateY(-30deg) scale(.74)}
+  12%,82%{transform:translateY(16%) rotateX(-24deg) rotateY(-26deg) scale(.74)}
   88%{transform:translateY(0) rotateX(-10deg) rotateY(-30deg)}
   96%{transform:translateY(-3%) rotateX(-10deg) rotateY(338deg)}
   98.5%{transform:translateY(0) rotateX(-10deg) rotateY(326deg)}
   100%{transform:translateY(0) rotateX(-10deg) rotateY(330deg)}}
 @keyframes bxlid{
-  0%,8%{transform:translateZ(calc(var(--d)/-2)) rotateX(90deg)}
-  16%,74%{transform:translateZ(calc(var(--d)/-2)) rotateX(-28deg)}
-  82%,100%{transform:translateZ(calc(var(--d)/-2)) rotateX(90deg)}}
+  0%,7%{transform:translateZ(calc(var(--d)/-2)) rotateX(90deg)}
+  14%,76%{transform:translateZ(calc(var(--d)/-2)) rotateX(206deg)}
+  83%,100%{transform:translateZ(calc(var(--d)/-2)) rotateX(90deg)}}
+@keyframes bxtg{
+  0%,8%{transform:rotateX(-100deg)}
+  14%,75%{transform:rotateX(0)}
+  82%,100%{transform:rotateX(-100deg)}}
+@keyframes bxfll{
+  0%,14%{transform:rotateX(90deg) translateZ(calc(var(--h)/2 - 2px)) rotateY(0)}
+  19%,71%{transform:rotateX(90deg) translateZ(calc(var(--h)/2 - 2px)) rotateY(-118deg)}
+  76%,100%{transform:rotateX(90deg) translateZ(calc(var(--h)/2 - 2px)) rotateY(0)}}
+@keyframes bxflr{
+  0%,15%{transform:rotateX(90deg) translateZ(calc(var(--h)/2 - 2px)) rotateY(0)}
+  20%,71%{transform:rotateX(90deg) translateZ(calc(var(--h)/2 - 2px)) rotateY(118deg)}
+  76%,100%{transform:rotateX(90deg) translateZ(calc(var(--h)/2 - 2px)) rotateY(0)}}
 @keyframes bxblis{
-  0%,17%{transform:translateY(0) rotateX(0)}
-  28%{transform:translateY(-90%) rotateX(0)}
-  38%,64%{transform:translateY(-90%) rotateX(360deg)}
-  73%,100%{transform:translateY(0) rotateX(360deg)}}
+  0%,21%{transform:translateY(0) rotateX(0)}
+  31%{transform:translateY(-90%) rotateX(0)}
+  40%,62%{transform:translateY(-90%) rotateX(360deg)}
+  70%,100%{transform:translateY(0) rotateX(360deg)}}
 @keyframes bxgum{
   0%,39%{opacity:0;transform:translateZ(2px) translate(0,0) scale(.35) rotate(0)}
   42%{opacity:1}
@@ -686,7 +709,14 @@ html:not([data-theme="dark"]) .ftr{background:#F1F7F3}
           <img class="f f--side f--right" src="assets/box-face-side.webp" width="392" height="800" alt="" decoding="async">
           <img class="f f--side f--left" src="assets/box-face-side.webp" width="392" height="800" alt="" decoding="async">
           <span class="f f--hole"></span>
-          <div class="bx-lid"><img class="lid-out" src="assets/box-face-top.webp" width="432" height="392" alt="" decoding="async"><span class="lid-in"></span></div>
+          <div class="bx-lid"><img class="lid-out" src="assets/box-face-top.webp" width="432" height="392" alt="" decoding="async"><span class="lid-in"></span><span class="lid-tg"></span></div>
+          <span class="bx-fl bx-fl--l"></span><span class="bx-fl bx-fl--r"></span>
+          <img class="bx-stk" style="transform:translateZ(calc(var(--d)*-3/8))" src="assets/blister-front.webp" alt="" decoding="async">
+          <img class="bx-stk" style="transform:translateZ(calc(var(--d)*-2/8))" src="assets/blister-front.webp" alt="" decoding="async">
+          <img class="bx-stk" style="transform:translateZ(calc(var(--d)*-1/8))" src="assets/blister-front.webp" alt="" decoding="async">
+          <img class="bx-stk" style="transform:translateZ(calc(var(--d)*1/8))" src="assets/blister-front.webp" alt="" decoding="async">
+          <img class="bx-stk" style="transform:translateZ(calc(var(--d)*2/8))" src="assets/blister-front.webp" alt="" decoding="async">
+          <img class="bx-stk" style="transform:translateZ(calc(var(--d)*3/8))" src="assets/blister-front.webp" alt="" decoding="async">
           <span class="f f--bot"></span>
           <div class="bx-blis" aria-hidden="true">
             <img class="bxf bxf--f" src="assets/blister-front.webp" alt="" decoding="async">
