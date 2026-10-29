@@ -7,6 +7,8 @@ Aperçu artifact (https://claude.ai/artifact/7qaKr4LRSiThENTokwnSs3) : il ne cha
 `assets/` séparés, donc lancer `python3 scripts/build-artifact.py` et publier `deploy/artifact.html`
 (images intégrées en data URI) sur cette URL. Dans `index.html`, écrire les chemins d'images en entier
 (`assets/xxx.webp`) pour que le script les trouve.
+`index.html` est la version courte (validée) : offres juste après le calculateur, carrousels sur mobile.
+`blanc.html` (essai blanc et vert) se régénère avec `python3 scripts/build-blanc.py` après chaque modif.
 
 ## Contexte métier
 - Produit unique : Nicorette® gomme 4 mg **Menthe fraîche**, boîte de 105 (7 plaquettes de 15).

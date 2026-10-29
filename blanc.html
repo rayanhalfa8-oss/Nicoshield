@@ -581,6 +581,7 @@ button{font:inherit;color:inherit}
   *{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
 </style>
+<style id="court">.specd{margin-bottom:1rem}.specd>summary{cursor:pointer;font-weight:600;padding:.8rem 0;min-height:44px}#probleme .triggers{margin-top:1rem}@media (max-width:639px){.method__grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:.7rem;margin-inline:calc(var(--g)*-1);padding:0 var(--g) .4rem;scrollbar-width:none}.method__grid::-webkit-scrollbar{display:none}.mstep{flex:0 0 78%;scroll-snap-align:start;padding:1.1rem;gap:.55rem}.mstep svg.ill{width:44px;height:44px}.mstep h3{font-size:1.2rem}.mstep p{font-size:.9rem}.tchips{flex-wrap:nowrap;overflow-x:auto;margin-inline:calc(var(--g)*-1);padding:0 var(--g) .3rem;scrollbar-width:none}.tchips::-webkit-scrollbar{display:none}.tchip{flex:none}.plan[data-plan]:not(.plan--best) ul,.plans--plq .plan ul{display:none}.plan[data-plan]:not(.plan--best){padding:1.3rem 1.1rem 1.1rem;gap:.6rem}.plan[data-plan]:not(.plan--best) .plan__price b{font-size:2.2rem}.hero .facts dd{font-size:.78rem}.hero .facts div{padding-top:.7rem}.sec{padding-block:clamp(2.6rem,9vw,4rem)}.swipe{display:block;font-size:.8rem;color:var(--muted);margin:-.3rem 0 .6rem}}.swipe{display:none}@media (max-width:559px){.promo{grid-template-columns:1fr 1fr;gap:.4rem}.promo__it{grid-template-columns:1fr;padding:.6rem .7rem;row-gap:.2rem}.promo__ic{grid-row:auto;font-size:1.2rem}.promo__it b{font-size:.85rem}.promo__it small{font-size:.72rem}}</style>
 <style id="theme-blanc">
 :root,:root[data-theme="light"]{
   --paper:#FFFFFF; --surface:#FFFFFF; --sunk:#F1F7F3; --line:#DCE9E1; --ink:#0B1F1A; --muted:#4F635B;
@@ -705,81 +706,6 @@ html:not([data-theme="dark"]) .ftr{background:#F1F7F3}
   </div>
 </section>
 
-<!-- PROBLÈME -->
-<section class="sec prob" id="probleme">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">Le vrai problème</span>
-      <h2 class="h2 rv">Ce n'est pas la volonté qui vous manque. <em>C'est la nicotine.</em></h2>
-      <p class="lede rv">Arrêter d'un coup, c'est affronter le manque à mains nues : nervosité, irritabilité, envie qui monte. C'est là que la plupart des rechutes arrivent. La gomme vous laisse arrêter le tabac sans subir ce manque.</p>
-    </div>
-    <div class="craving rv">
-      <div class="craving__top"><b>Une journée type de sevrage</b><small>Illustration</small></div>
-      <svg viewBox="0 0 800 220" role="img" aria-label="Sans aide, l'envie monte en pics élevés. Avec la gomme, les pics restent bas.">
-        <path d="M0 200h800M0 140h800M0 80h800M0 20h800" stroke="#1F4A40" stroke-dasharray="3 6"/>
-        <path id="curveRaw" d="M0 190 C60 190 70 40 110 40 S170 185 220 185 270 30 320 30 380 180 430 180 490 45 540 45 590 182 640 182 700 35 750 35 780 170 800 170" fill="none" stroke="#B9532C" stroke-width="3" stroke-linecap="round"/>
-        <path id="curveGum" d="M0 190 C60 190 70 130 110 130 S170 188 220 188 270 125 320 125 380 186 430 186 490 135 540 135 590 188 640 188 700 130 750 130 780 182 800 182" fill="none" stroke="#9FE3C8" stroke-width="3.5" stroke-linecap="round"/>
-        <g fill="#E3A23B" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="1"><text x="80" y="214">CAFÉ</text><text x="285" y="214">APRÈS DÉJ'</text><text x="510" y="214">STRESS</text><text x="715" y="214">SOIRÉE</text></g>
-      </svg>
-      <div class="lg"><span><i style="background:#B9532C"></i>Arrêt à sec</span><span><i style="background:#9FE3C8"></i>Avec la gomme</span></div>
-    </div>
-    <div class="triggers">
-      <h3 class="rv">Votre moment le plus dur, c'est lequel ?</h3>
-      <div class="tchips" role="group" aria-label="Votre moment le plus difficile">
-        <button class="tchip" type="button" aria-pressed="true" data-t="cafe">☕ Le café du matin</button>
-        <button class="tchip" type="button" aria-pressed="false" data-t="repas">🍲 Après le tajine</button>
-        <button class="tchip" type="button" aria-pressed="false" data-t="trafic">🚗 Dans les bouchons</button>
-        <button class="tchip" type="button" aria-pressed="false" data-t="travail">💼 La pause au boulot</button>
-        <button class="tchip" type="button" aria-pressed="false" data-t="match">⚽ Le match au café</button>
-        <button class="tchip" type="button" aria-pressed="false" data-t="stress">😤 Les coups de stress</button>
-      </div>
-      <div class="tans" id="tans" aria-live="polite"><b></b><p></p></div>
-    </div>
-  </div>
-</section>
-
-<!-- MÉTHODE -->
-<section class="sec" id="methode">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">La méthode</span>
-      <h2 class="h2 rv">Mâcher. Poser. <em>Recommencer.</em></h2>
-      <p class="lede rv">Ce n'est pas un chewing-gum ordinaire : la nicotine passe par l'intérieur de la joue. Bien utilisée, une gomme agit environ 30 minutes.</p>
-    </div>
-    <div class="method__grid">
-      <article class="mstep rv">
-        <svg class="ill" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="34" fill="var(--mint-soft)"/><use href="#gum" x="18" y="18" width="36" height="36"/></svg>
-        <span class="mstep__n">01 — MÂCHER</span><h3>Mâchez lentement</h3>
-        <p>Jusqu'à sentir un goût fort ou un léger picotement : la nicotine commence à se libérer.</p>
-        <span class="mstep__t">Quelques mastications</span>
-      </article>
-      <article class="mstep rv">
-        <svg class="ill" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="34" fill="var(--mint-soft)"/><path d="M20 30c4 14 28 14 32 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><rect x="40" y="34" width="12" height="9" rx="3" fill="#fff" stroke="#C9D6D0"/></svg>
-        <span class="mstep__n">02 — POSER</span><h3>Gardez-la contre la joue</h3>
-        <p>Entre la joue et la gencive, environ 10 minutes. La nicotine passe doucement dans le sang.</p>
-        <span class="mstep__t">≈ 10 minutes</span>
-      </article>
-      <article class="mstep rv">
-        <svg class="ill" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="34" fill="var(--mint-soft)"/><path d="M22 36a14 14 0 1 1 4 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M20 44l6 3 1-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span class="mstep__n">03 — RECOMMENCER</span><h3>Mâchez très lentement</h3>
-        <p>Quand le goût s'estompe, alternez : quelques mastications, puis on repose. Environ 20 fois en 20 minutes.</p>
-        <span class="mstep__t">≈ 30 minutes au total</span>
-      </article>
-    </div>
-    <div class="chewbar rv" aria-hidden="true">
-      <div class="chewbar__track"><i></i><i></i><i></i></div>
-      <div class="chewbar__lg"><span>Mâcher</span><span>Poser · 10 min</span><span>Mâcher / poser · 20 min</span></div>
-    </div>
-    <div class="proof rv">
-      <div class="proof__n" id="proofN">+60 %</div>
-      <div>
-        <p><strong>Les substituts nicotiniques augmentent de 50 à 60 % les chances d'arrêter de fumer</strong> par rapport à un arrêt sans aide, d'après une revue de 133 études cliniques.</p>
-        <small>Source : Hartmann-Boyce J. et al., Cochrane Database of Systematic Reviews, 2018.</small>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CALCULATEUR -->
 <section class="sec calc" id="calcul">
   <div class="wrap">
@@ -806,91 +732,6 @@ html:not([data-theme="dark"]) .ftr{background:#F1F7F3}
         <p class="verdict" id="verdict"></p>
         <a class="btn btn--p btn--block" href="#offres">Arrêter de payer · voir les packs <svg class="arr"><use href="#i-arrow"/></svg></a>
         <p class="calc__note">Calcul : cigarettes/jour ÷ 20 × prix du paquet × 365.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CORPS -->
-<section class="sec" id="corps">
-  <div class="wrap body__grid">
-    <div>
-      <div class="head">
-        <span class="eyebrow">Ce qui change dans votre corps</span>
-        <h2 class="h2 rv">Dès la dernière cigarette, <em>le corps répare.</em></h2>
-      </div>
-      <ol class="tl" id="tl">
-        <span class="tl__fill" id="tlFill" aria-hidden="true"></span>
-        <li class="rv"><b>20 minutes</b><span>Le rythme cardiaque et la tension baissent.</span></li>
-        <li class="rv"><b>12 heures</b><span>Le monoxyde de carbone dans le sang revient à la normale.</span></li>
-        <li class="rv"><b>2 à 12 semaines</b><span>La circulation s'améliore, le souffle revient.</span></li>
-        <li class="rv"><b>1 à 9 mois</b><span>Moins de toux, moins d'essoufflement.</span></li>
-        <li class="rv"><b>1 an</b><span>Le risque de maladie coronarienne baisse de moitié environ.</span></li>
-        <li class="rv"><b>5 à 15 ans</b><span>Le risque d'AVC rejoint celui d'un non-fumeur.</span></li>
-      </ol>
-      <small style="color:var(--muted);font-size:.8rem">Source : Organisation mondiale de la santé (OMS).</small>
-    </div>
-    <div class="angles">
-      <article class="angle angle--ram rv">
-        <svg class="moon" viewBox="0 0 100 100" aria-hidden="true"><path d="M62 10a40 40 0 1 0 28 62A34 34 0 1 1 62 10z" fill="currentColor"/></svg>
-        <span class="ar">رمضان فرصة</span>
-        <h3>Pendant Ramadan, vous tenez déjà 15 heures.</h3>
-        <p>Le plus dur, c'est après l'ftour. Gardez une gomme pour ce moment-là, entre l'ftour et le shour. Jamais pendant le jeûne.</p>
-      </article>
-      <article class="angle rv">
-        <span class="ar">على ولادك</span>
-        <h3>Pour ceux qui respirent votre fumée.</h3>
-        <p>À la maison, dans la voiture, au salon : la fumée ne reste pas dans la cigarette. Arrêter, c'est aussi un cadeau pour la famille.</p>
-      </article>
-      <article class="angle rv">
-        <span class="ar">فلوسك</span>
-        <h3>Le programme coûte moins que 3 mois de tabac.</h3>
-        <p>Un paquet par jour à 38 DH, c'est environ 3 470 DH en 3 mois. Le programme 4 boîtes est à 1 500 DH, soit le prix d'environ 40 paquets.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUIT HÉROS -->
-<section class="sec" id="produit" style="padding-top:0">
-  <div class="wrap prod__grid">
-    <div class="prod__vis rv">
-      <div class="prod__main">
-        <div class="pframe"><div class="pflip" id="pflip">
-          <img class="pflip__f" src="assets/box-face-front.webp" width="432" height="800" loading="lazy" decoding="async" alt="Nicorette gomme 4 mg Menthe fraîche, 105 gommes, face avant">
-          <img class="pflip__s pflip__r" src="assets/box-face-side.webp" width="392" height="800" loading="lazy" decoding="async" alt="">
-          <img class="pflip__s pflip__l" src="assets/box-face-side.webp" width="392" height="800" loading="lazy" decoding="async" alt="">
-          <img class="pflip__t" src="assets/box-face-top.webp" width="432" height="392" loading="lazy" decoding="async" alt="">
-          <span class="pflip__u"></span>
-          <img class="pflip__b" src="assets/box-face-back.webp" width="432" height="800" loading="lazy" decoding="async" alt="Dos de la boîte : indications, posologie en deux étapes, maximum 15 gommes par jour, mise en garde grossesse">
-        </div></div>
-        <div class="ptabs" role="group" aria-label="Voir la boîte">
-          <button type="button" aria-pressed="true" data-side="f">Face avant</button>
-          <button type="button" aria-pressed="false" data-side="b">Lire la notice</button>
-        </div>
-        <p class="pflip__hint" id="pflipHint" aria-live="polite">La boîte authentique, scellée, telle que vous la recevez.</p>
-      </div>
-    </div>
-    <div>
-      <div class="head" style="margin-bottom:1.6rem">
-        <span class="eyebrow">Le produit phare</span>
-        <h2 class="h2 rv">Nicorette® gomme <em>4 mg Menthe fraîche.</em></h2>
-        <p class="lede rv">Des gommes carrées et blanches, sous plaquettes, sans sucre. Exactement la boîte que vous recevez.</p>
-      </div>
-      <table class="spec rv">
-        <tbody>
-          <tr><th scope="row">Forme</th><td>Gomme à mâcher médicamenteuse, sans sucre</td></tr>
-          <tr><th scope="row">Dosage</th><td>4 mg de nicotine par gomme</td></tr>
-          <tr><th scope="row">Contenu</th><td>105 gommes par boîte</td></tr>
-          <tr><th scope="row">Pour qui</th><td>Fumeurs très fortement à fortement dépendants, en général plus de 20 cigarettes/jour. En dessous, demandez conseil à votre pharmacien.</td></tr>
-          <tr><th scope="row">Posologie</th><td>Au début 8 à 12 gommes/jour, puis réduction progressive. <strong>15 maximum</strong> par jour.</td></tr>
-          <tr><th scope="row">Durée</th><td>≈ 3 mois, puis réduction jusqu'à 1–2 gommes/jour. Pas au-delà de 12 mois.</td></tr>
-          <tr><th scope="row">N° d'AMM</th><td><span class="todo" data-cfg="amm">à compléter</span></td></tr>
-        </tbody>
-      </table>
-      <div class="callout rv">
-        <b>Précautions</b>
-        <span>Médicament. Lisez attentivement la notice. Demandez l'avis d'un médecin ou d'un pharmacien en cas de grossesse, d'allaitement, de maladie cardiaque, d'hypertension non contrôlée ou de diabète. Tenir hors de portée des enfants.</span>
       </div>
     </div>
   </div>
@@ -956,12 +797,6 @@ html:not([data-theme="dark"]) .ftr{background:#F1F7F3}
     </div>
     <div class="nudge" id="nudge" hidden><span id="nudgeT"></span><button class="btn btn--p btn--sm" type="button" id="nudgeBtn">Passer à 2 boîtes</button></div>
 
-    <div class="guar">
-      <div class="rv"><svg><use href="#i-cash"/></svg><b>Vous payez à la réception</b>En espèces, au livreur. Rien à payer en ligne.</div>
-      <div class="rv"><svg><use href="#i-truck"/></svg><b>Partout au Maroc</b>De Tanger à Dakhla, livré chez vous.</div>
-      <div class="rv"><svg><use href="#i-box"/></svg><b>Colis discret</b>Emballage neutre, sans mention du contenu.</div>
-      <div class="rv"><svg><use href="#i-chat"/></svg><b>Conseil en darija</b>Une question ? On répond sur WhatsApp.</div>
-    </div>
   </div>
 </section>
 
@@ -1010,6 +845,120 @@ html:not([data-theme="dark"]) .ftr{background:#F1F7F3}
   </div>
 </section>
 
+<!-- PRODUIT HÉROS -->
+<section class="sec" id="produit" style="padding-top:0">
+  <div class="wrap prod__grid">
+    <div class="prod__vis rv">
+      <div class="prod__main">
+        <div class="pframe"><div class="pflip" id="pflip">
+          <img class="pflip__f" src="assets/box-face-front.webp" width="432" height="800" loading="lazy" decoding="async" alt="Nicorette gomme 4 mg Menthe fraîche, 105 gommes, face avant">
+          <img class="pflip__s pflip__r" src="assets/box-face-side.webp" width="392" height="800" loading="lazy" decoding="async" alt="">
+          <img class="pflip__s pflip__l" src="assets/box-face-side.webp" width="392" height="800" loading="lazy" decoding="async" alt="">
+          <img class="pflip__t" src="assets/box-face-top.webp" width="432" height="392" loading="lazy" decoding="async" alt="">
+          <span class="pflip__u"></span>
+          <img class="pflip__b" src="assets/box-face-back.webp" width="432" height="800" loading="lazy" decoding="async" alt="Dos de la boîte : indications, posologie en deux étapes, maximum 15 gommes par jour, mise en garde grossesse">
+        </div></div>
+        <div class="ptabs" role="group" aria-label="Voir la boîte">
+          <button type="button" aria-pressed="true" data-side="f">Face avant</button>
+          <button type="button" aria-pressed="false" data-side="b">Lire la notice</button>
+        </div>
+        <p class="pflip__hint" id="pflipHint" aria-live="polite">La boîte authentique, scellée, telle que vous la recevez.</p>
+      </div>
+    </div>
+    <div>
+      <div class="head" style="margin-bottom:1.6rem">
+        <span class="eyebrow">Le produit phare</span>
+        <h2 class="h2 rv">Nicorette® gomme <em>4 mg Menthe fraîche.</em></h2>
+        <p class="lede rv">Des gommes carrées et blanches, sous plaquettes, sans sucre. Exactement la boîte que vous recevez.</p>
+      </div>
+      <details class="specd"><summary>Voir les détails du produit</summary>
+      <table class="spec rv">
+        <tbody>
+          <tr><th scope="row">Forme</th><td>Gomme à mâcher médicamenteuse, sans sucre</td></tr>
+          <tr><th scope="row">Dosage</th><td>4 mg de nicotine par gomme</td></tr>
+          <tr><th scope="row">Contenu</th><td>105 gommes par boîte</td></tr>
+          <tr><th scope="row">Pour qui</th><td>Fumeurs très fortement à fortement dépendants, en général plus de 20 cigarettes/jour. En dessous, demandez conseil à votre pharmacien.</td></tr>
+          <tr><th scope="row">Posologie</th><td>Au début 8 à 12 gommes/jour, puis réduction progressive. <strong>15 maximum</strong> par jour.</td></tr>
+          <tr><th scope="row">Durée</th><td>≈ 3 mois, puis réduction jusqu'à 1–2 gommes/jour. Pas au-delà de 12 mois.</td></tr>
+          <tr><th scope="row">N° d'AMM</th><td><span class="todo" data-cfg="amm">à compléter</span></td></tr>
+        </tbody>
+      </table>
+      </details>
+      <div class="callout rv">
+        <b>Précautions</b>
+        <span>Médicament. Lisez attentivement la notice. Demandez l'avis d'un médecin ou d'un pharmacien en cas de grossesse, d'allaitement, de maladie cardiaque, d'hypertension non contrôlée ou de diabète. Tenir hors de portée des enfants.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLÈME -->
+<section class="sec prob" id="probleme">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Le vrai problème</span>
+      <h2 class="h2 rv">Ce n'est pas la volonté qui vous manque. <em>C'est la nicotine.</em></h2>
+      <p class="lede rv">Arrêter d'un coup, c'est affronter le manque à mains nues : nervosité, irritabilité, envie qui monte. C'est là que la plupart des rechutes arrivent. La gomme vous laisse arrêter le tabac sans subir ce manque.</p>
+    </div>
+    <div class="triggers">
+      <h3 class="rv">Votre moment le plus dur, c'est lequel ?</h3>
+      <div class="tchips" role="group" aria-label="Votre moment le plus difficile">
+        <button class="tchip" type="button" aria-pressed="true" data-t="cafe">☕ Le café du matin</button>
+        <button class="tchip" type="button" aria-pressed="false" data-t="repas">🍲 Après le tajine</button>
+        <button class="tchip" type="button" aria-pressed="false" data-t="trafic">🚗 Dans les bouchons</button>
+        <button class="tchip" type="button" aria-pressed="false" data-t="travail">💼 La pause au boulot</button>
+        <button class="tchip" type="button" aria-pressed="false" data-t="match">⚽ Le match au café</button>
+        <button class="tchip" type="button" aria-pressed="false" data-t="stress">😤 Les coups de stress</button>
+      </div>
+      <div class="tans" id="tans" aria-live="polite"><b></b><p></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MÉTHODE -->
+<section class="sec" id="methode">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">La méthode</span>
+      <h2 class="h2 rv">Mâcher. Poser. <em>Recommencer.</em></h2>
+      <p class="lede rv">Ce n'est pas un chewing-gum ordinaire : la nicotine passe par l'intérieur de la joue. Bien utilisée, une gomme agit environ 30 minutes.</p>
+    </div>
+    <span class="swipe" aria-hidden="true">Faites glisser →</span>
+    <div class="method__grid">
+      <article class="mstep rv">
+        <svg class="ill" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="34" fill="var(--mint-soft)"/><use href="#gum" x="18" y="18" width="36" height="36"/></svg>
+        <span class="mstep__n">01 — MÂCHER</span><h3>Mâchez lentement</h3>
+        <p>Jusqu'à sentir un goût fort ou un léger picotement : la nicotine commence à se libérer.</p>
+        <span class="mstep__t">Quelques mastications</span>
+      </article>
+      <article class="mstep rv">
+        <svg class="ill" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="34" fill="var(--mint-soft)"/><path d="M20 30c4 14 28 14 32 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><rect x="40" y="34" width="12" height="9" rx="3" fill="#fff" stroke="#C9D6D0"/></svg>
+        <span class="mstep__n">02 — POSER</span><h3>Gardez-la contre la joue</h3>
+        <p>Entre la joue et la gencive, environ 10 minutes. La nicotine passe doucement dans le sang.</p>
+        <span class="mstep__t">≈ 10 minutes</span>
+      </article>
+      <article class="mstep rv">
+        <svg class="ill" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="34" fill="var(--mint-soft)"/><path d="M22 36a14 14 0 1 1 4 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M20 44l6 3 1-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="mstep__n">03 — RECOMMENCER</span><h3>Mâchez très lentement</h3>
+        <p>Quand le goût s'estompe, alternez : quelques mastications, puis on repose. Environ 20 fois en 20 minutes.</p>
+        <span class="mstep__t">≈ 30 minutes au total</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CORPS -->
+<section class="sec" id="corps" style="padding-top:0">
+  <div class="wrap">
+    <article style="max-width:640px;margin-inline:auto" class="angle angle--ram rv">
+      <svg class="moon" viewBox="0 0 100 100" aria-hidden="true"><path d="M62 10a40 40 0 1 0 28 62A34 34 0 1 1 62 10z" fill="currentColor"/></svg>
+      <span class="ar">رمضان فرصة</span>
+      <h3>Pendant Ramadan, vous tenez déjà 15 heures.</h3>
+      <p>Le plus dur, c'est après l'ftour. Gardez une gomme pour ce moment-là, entre l'ftour et le shour. Jamais pendant le jeûne.</p>
+    </article>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="sec faq cv" id="faq">
   <div class="wrap faq__grid">
@@ -1031,16 +980,6 @@ html:not([data-theme="dark"]) .ftr{background:#F1F7F3}
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="sec final cv">
-  <svg class="zel" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#zellige)"/></svg>
-  <div class="wrap final__in">
-    <span class="ar rv">صافي، هادي آخر كارو</span>
-    <h2 class="h2 rv">Votre dernière cigarette, <em>c'est maintenant.</em></h2>
-    <p class="rv">Commandez aujourd'hui, payez à la livraison, commencez dès que le colis arrive.</p>
-    <a class="btn btn--p rv" href="#offres">Je commence mon programme <svg class="arr"><use href="#i-arrow"/></svg></a>
-  </div>
-</section>
 </main>
 
 <footer class="ftr">
