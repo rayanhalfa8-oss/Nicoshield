@@ -1089,8 +1089,8 @@ button{font:inherit;color:inherit}
 
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const fmt = n => Math.round(n).toLocaleString("fr-FR").replace(/[  ]/g, " ");
-  const dh = n => fmt(n) + " DH";
+  const fmt = n => Math.round(n).toLocaleString("fr-FR").replace(/\s/g, "\u00a0");
+  const dh = n => fmt(n) + "\u00a0DH";
   const img = (k, cls = "") => `<span class="shot ${cls}"><img src="${P[k].img}" width="640" height="640" loading="lazy" decoding="async" alt=""></span>`;
   const mbox = (i, free) => `<span class="mbox${free ? " free" : ""}" style="--i:${i}" aria-hidden="true"><span class="mbox__in"><img class="f f--front" src="assets/box-face-front.webp" alt=""><img class="f f--back" src="assets/box-face-back.webp" alt=""><img class="f f--side f--right" src="assets/box-face-side.webp" alt=""><img class="f f--side f--left" src="assets/box-face-side.webp" alt=""><img class="f f--top" src="assets/box-face-top.webp" alt=""><span class="f f--bot"></span></span></span>`;
   const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
