@@ -150,7 +150,7 @@ button{font:inherit;color:inherit}
 @media (min-width:640px) and (max-width:759px),(min-width:1020px){.facts{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (min-width:760px),(min-width:560px) and (orientation:landscape){.hero__grid{grid-template-columns:1.05fr .95fr;gap:clamp(1.5rem,4vw,3.5rem)}.h1{font-size:clamp(2.4rem,5.4vw,6rem)}}
 
-.stage{position:relative;aspect-ratio:1/1;border-radius:32px;overflow:hidden;background:radial-gradient(34% 30% at 50% 48%,rgb(230 255 250/.75),transparent 80%),radial-gradient(58% 48% at 50% 48%,rgb(63 193 201/.85),transparent 75%),radial-gradient(120% 90% at 50% 40%,#5FAE1F 0%,#2E7D12 40%,#14560A 68%,#082E05 100%);isolation:isolate;order:-1;color:#EAF7D9;box-shadow:inset 0 0 0 1px rgb(255 255 255/.12),0 30px 60px -30px rgb(12 63 7/.55)}
+.stage{position:relative;aspect-ratio:1/1;border-radius:32px;overflow:hidden;background:radial-gradient(34% 30% at 50% 48%,rgb(230 255 250/.75),transparent 80%),radial-gradient(58% 48% at 50% 48%,rgb(63 193 201/.85),transparent 75%),radial-gradient(120% 90% at 50% 40%,#5FAE1F 0%,#2E7D12 40%,#14560A 68%,#082E05 100%);isolation:isolate;order:-1;-webkit-mask-image:-webkit-radial-gradient(white,black);transform:translateZ(0);color:#EAF7D9;box-shadow:inset 0 0 0 1px rgb(255 255 255/.12),0 30px 60px -30px rgb(12 63 7/.55)}
 @media (max-width:639px){.stage{aspect-ratio:5/6}.chip{font-size:.75rem}.chip--a{top:4%}.stage__badge{width:72px;height:72px;font-size:.75rem}.stage__badge big{font-size:1.1rem}}
 @media (min-width:760px),(min-width:560px) and (orientation:landscape){.stage{order:0;aspect-ratio:4/5}}
 @media (orientation:landscape) and (max-height:540px){.hero__grid{align-items:start}.stage{aspect-ratio:auto;height:min(80svh,440px)}.stage .chip{display:none}.hero{padding-block:1rem 3rem}}
@@ -158,8 +158,8 @@ button{font:inherit;color:inherit}
 /* Boîte réelle (photos 4 mg) : tour de 360°, face puis dos, puis retour à sa place */
 /* Boîte en vrai volume, proportions mesurées sur les photos : largeur 0,54 × hauteur, épaisseur 0,49 × hauteur.
    --h (px) est fixé en JS d'après la hauteur du cadre : translateZ n'accepte pas de pourcentage. */
-.box3d{--h:360px;--w:calc(var(--h)*.54);--d:calc(var(--h)*.49);position:absolute;left:50%;top:50%;width:var(--w);height:var(--h);translate:-50% -50%;perspective:calc(var(--h)*3.5);cursor:pointer;-webkit-tap-highlight-color:transparent}
-.box3d__spin,.box3d__in{position:absolute;inset:0;transform-style:preserve-3d}
+.box3d{--h:360px;--w:calc(var(--h)*.54);--d:calc(var(--h)*.49);position:absolute;left:50%;top:50%;width:var(--w);height:var(--h);margin:calc(var(--h)/-2) 0 0 calc(var(--w)/-2);perspective:calc(var(--h)*3.5);-webkit-perspective:calc(var(--h)*3.5);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.box3d__spin,.box3d__in{position:absolute;inset:0;will-change:transform;transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
 .box3d__in{transform:rotateX(-10deg) rotateY(-30deg)}
 .box3d .f{position:absolute;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .f--front,.f--back{left:0;top:0;width:100%;height:100%}
@@ -167,15 +167,15 @@ button{font:inherit;color:inherit}
 .f--back{transform:rotateY(180deg) translateZ(calc(var(--d)/2))}
 .f--side{top:0;left:50%;width:var(--d);height:100%;margin-left:calc(var(--d)/-2)}
 .f--right{transform:rotateY(90deg) translateZ(calc(var(--w)/2))}
-.f--left{transform:rotateY(-90deg) translateZ(calc(var(--w)/2));filter:brightness(.85)}
+.f--left{transform:rotateY(-90deg) translateZ(calc(var(--w)/2));opacity:.92}
 /* Plaquette rangée dans la boîte : elle sort, se retourne, libère une gomme, puis rentre */
-.bx-blis{position:absolute;left:4%;top:6%;width:92%;aspect-ratio:534/882;transform-style:preserve-3d}
+.bx-blis{position:absolute;left:4%;top:6%;width:92%;aspect-ratio:534/882;transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
 .bxf{position:absolute;inset:0;width:100%;height:100%;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .bxf--f{transform:translateZ(1.5px)}
 .bxf--b{transform:rotateY(180deg) translateZ(1.5px)}
 .bx-gum{position:absolute;left:34%;top:5%;width:32%;opacity:0;transform:translateZ(2px) scale(.35);filter:drop-shadow(0 10px 10px rgb(4 30 3/.45))}
 /* Rabat du dessus, charnière sur l'arête arrière : il s'ouvre avant que la plaquette sorte */
-.bx-lid{position:absolute;left:0;top:0;width:100%;height:var(--d);transform-style:preserve-3d;transform-origin:50% 0;transform:translateZ(calc(var(--d)/-2)) rotateX(90deg)}
+.bx-lid{position:absolute;left:0;top:0;width:100%;height:var(--d);transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transform-origin:50% 0;transform:translateZ(calc(var(--d)/-2)) rotateX(90deg)}
 .bx-lid>*{position:absolute;inset:0;width:100%;height:100%;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .lid-in{transform:rotateX(180deg);background:linear-gradient(#FBFBF8,#E9EAE4)}
 /* languette blanche du rabat (code-barres) : rentrée dans la boîte quand c'est fermé */
@@ -187,11 +187,11 @@ button{font:inherit;color:inherit}
 /* intérieur de la boîte : carton blanc comme la vraie (parois vues de l'intérieur) */
 .f-in{position:absolute;display:block;background:linear-gradient(#FFFFFF,#E6E7E1 70%,#D6D8D1);backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .f-in--f,.f-in--b{left:0;top:0;width:100%;height:100%}
-.f-in--f{transform:rotateY(180deg) translateZ(calc(var(--d)/-2 + 1px))}
-.f-in--b{transform:translateZ(calc(var(--d)/-2 + 1px));background:linear-gradient(#F4F4F0,#DDDED8 70%)}
+.f-in--f{transform:rotateY(180deg) translateZ(calc(var(--d)/-2 + 4px))}
+.f-in--b{transform:translateZ(calc(var(--d)/-2 + 4px));background:linear-gradient(#F4F4F0,#DDDED8 70%)}
 .f-in--l,.f-in--r{top:0;left:50%;width:var(--d);height:100%;margin-left:calc(var(--d)/-2)}
-.f-in--l{transform:rotateY(90deg) translateZ(calc(var(--w)/-2 + 1px));background:linear-gradient(90deg,#ECEDE8,#FAFAF7)}
-.f-in--r{transform:rotateY(-90deg) translateZ(calc(var(--w)/-2 + 1px));background:linear-gradient(90deg,#FAFAF7,#E2E3DD)}
+.f-in--l{transform:rotateY(90deg) translateZ(calc(var(--w)/-2 + 4px));background:linear-gradient(90deg,#ECEDE8,#FAFAF7)}
+.f-in--r{transform:rotateY(-90deg) translateZ(calc(var(--w)/-2 + 4px));background:linear-gradient(90deg,#FAFAF7,#E2E3DD)}
 /* les 6 autres plaquettes rangées debout derrière / devant celle qui sort */
 .bx-stk{position:absolute;left:4%;top:6%;width:92%;aspect-ratio:534/882;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .f--hole{left:0;top:50%;width:100%;height:var(--d);margin-top:calc(var(--d)/-2);transform:rotateX(90deg) translateZ(calc(var(--h)/2 - var(--h)*.16));background:linear-gradient(#E4E5DF,#CFD1CA)}
@@ -314,7 +314,7 @@ button{font:inherit;color:inherit}
 /* Visionneuse : face avant / notice au dos, zoom au toucher */
 .pframe{perspective:1300px;overflow:hidden;border-radius:18px;padding:clamp(1.4rem,4vw,2.2rem) 0 clamp(1.6rem,4.5vw,2.4rem)}
 /* Boîte 3D de la fiche : 3/4 au repos (avec épaisseur), dos à plat pour lire la notice, zoom au toucher */
-.pflip{--w:min(52vw,230px);--h:calc(var(--w)*800/432);--d:calc(var(--h)*.49);position:relative;width:var(--w);height:var(--h);margin:0 auto;transform-style:preserve-3d;transition:transform .9s var(--ease);cursor:pointer;transform-origin:var(--ox,50%) var(--oy,50%);transform:rotateX(-8deg) rotateY(-28deg)}
+.pflip{--w:min(52vw,230px);--h:calc(var(--w)*800/432);--d:calc(var(--h)*.49);position:relative;width:var(--w);height:var(--h);margin:0 auto;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .9s var(--ease);cursor:pointer;transform-origin:var(--ox,50%) var(--oy,50%);transform:rotateX(-8deg) rotateY(-28deg)}
 .pflip>*{position:absolute;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .pflip__f,.pflip__b{inset:0;width:100%;height:100%}
 .pflip__f{transform:translateZ(calc(var(--d)/2))}
@@ -335,8 +335,8 @@ button{font:inherit;color:inherit}
 /* Plaquette 3D : photo réelle au recto, aluminium au verso, vraie épaisseur */
 .pblis{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:1.1rem 1.2rem}
 .blister{--bw:clamp(96px,26vw,140px);--bh:calc(var(--bw)*882/534);--bt:5px;position:relative;width:calc(var(--bw)*1.25);height:calc(var(--bh)*1.08);perspective:900px;display:grid;place-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.blister__spin{position:relative;width:var(--bw);height:var(--bh);transform-style:preserve-3d}
-.blister__in{position:relative;width:var(--bw);height:var(--bh);transform-style:preserve-3d;transform:rotateY(-22deg) rotateX(8deg)}
+.blister__spin{position:relative;width:var(--bw);height:var(--bh);transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
+.blister__in{position:relative;width:var(--bw);height:var(--bh);transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transform:rotateY(-22deg) rotateX(8deg)}
 .bf{position:absolute;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .bf--front,.bf--back{inset:0;width:100%;height:100%}
 .bf--front{transform:translateZ(calc(var(--bt)/2))}
@@ -356,7 +356,7 @@ button{font:inherit;color:inherit}
 @media (max-width:639px){.plans--plq .plan{padding:1.5rem .85rem 1rem;gap:.7rem}.plans--plq .plan__name{font-size:1.1rem}.plans--plq .plan__price b{font-size:2.1rem}.plans--plq .plan__unit{font-size:.7rem}.plans--plq .plan__save{font-size:.72rem;padding:.35rem .5rem}.plans--plq .plan ul{font-size:.8rem}.plans--plq .plan__tag{left:.85rem;font-size:.65rem}}
 @media (max-width:359px){.plans--plq .plan{padding-inline:.65rem}.plans--plq .plan__name{font-size:1rem}.plans--plq .mblis{--h:54px}}
 .mblis{--h:66px;--w:calc(var(--h)*534/882);position:relative;width:calc(var(--w) + 14px);height:calc(var(--h) + 8px);perspective:420px;display:grid;place-items:center}
-.mblis__in{position:relative;width:var(--w);height:var(--h);transform-style:preserve-3d;transform:rotateX(8deg) rotateY(-24deg)}
+.mblis__in{position:relative;width:var(--w);height:var(--h);transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transform:rotateX(8deg) rotateY(-24deg)}
 .mblis img{position:absolute;inset:0;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(1px)}
 .mblis img.b{transform:rotateY(180deg) translateZ(1px)}
 .plq{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.35rem}
@@ -398,7 +398,7 @@ button{font:inherit;color:inherit}
 .plan__boxes{display:flex;gap:6px;align-items:flex-end;min-height:78px;padding-bottom:6px}
 /* Mini boîtes 3D (mêmes faces que le héros), sans fond, qui tournent puis reviennent */
 .mbox{--h:60px;--w:calc(var(--h)*.54);--d:calc(var(--h)*.49);position:relative;width:calc(var(--w) + var(--d)*.55);height:calc(var(--h) + 10px);perspective:420px;display:grid;place-items:center}
-.mbox__in{position:relative;width:var(--w);height:var(--h);transform-style:preserve-3d;transform:rotateX(-10deg) rotateY(-30deg)}
+.mbox__in{position:relative;width:var(--w);height:var(--h);transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transform:rotateX(-10deg) rotateY(-30deg)}
 .mbox .f{position:absolute;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .mbox.free::after{content:"OFFERTE";position:absolute;left:50%;bottom:-4px;translate:-50% 0;z-index:2;font:700 .625rem/1 var(--f-m);letter-spacing:.04em;background:var(--saffron);color:#2A1700;padding:.22rem .35rem;border-radius:999px;white-space:nowrap}
 .plan__price{display:flex;align-items:baseline;gap:.4rem;flex-wrap:wrap}
@@ -731,7 +731,7 @@ button{font:inherit;color:inherit}
       <img class="stage__gum stage__gum--4" src="assets/gomme-cassee.webp" width="671" height="395" alt="" aria-hidden="true" decoding="async">
       <div class="stage__badge" aria-hidden="true"><span><big>+1</big>boîte<br>offerte</span></div>
       <div class="chip chip--a" aria-hidden="true"><i><svg><use href="#i-wave"/></svg></i><span><b>Une envie ?</b>une gomme, elle redescend</span></div>
-      <div class="chip chip--b" aria-hidden="true"><i><svg><use href="#i-clock"/></svg></i><span><b>≈ 30 min</b>d'effet par gomme</span></div>
+      <div class="chip chip--b" aria-hidden="true"><i><svg><use href="#i-clock"/></svg></i><span><b>1 à 2 h</b>entre deux gommes</span></div>
     </div>
   </div>
 </section>
